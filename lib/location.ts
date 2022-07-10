@@ -1,15 +1,25 @@
-// This function helps to give you the current postion of the client
+// Just returns a promise to handle location
+// Attention must use this function inside the client
 
-export function getLocation() {
-  if ("geolocation" in navigator) {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject, {
-        maximumAge: 0,
-        timeout: 10000,
-        enableHighAccuracy: true,
-      });
-    });
-  } else {
-    alert("Error !");
-  }
+//const minute = 1000 * 60;
+
+export function Location() {
+  let id: number = -1;
+
+  return {
+    id,
+    promise: new Promise<GeolocationPosition>((resolve, reject) => {
+      id = navigator.geolocation.watchPosition(resolve, reject, config);
+    }),
+  };
 }
+
+export function stopLocation(id: number) {
+  navigator.geolocation.clearWatch(id);
+}
+
+export const config = {
+  maximumAge: 0,
+  timeout: Infinity,
+  enableHighAccuracy: true,
+};

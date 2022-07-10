@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import { Body } from "../components/body/body";
-import { getLocation } from "../lib/location";
+import Link from "next/link";
 
 interface Cords {
   latitude?: number;
@@ -9,18 +8,6 @@ interface Cords {
 }
 
 export default function Home() {
-  const [location] = useState<Cords>({
-    latitude: undefined,
-    longitude: undefined,
-  });
-
-  // Everytime user refreshes homepage updates
-  useEffect(() => {
-     
-  }, []);
-
-
-
   return (
     <div>
       <Head>
@@ -29,6 +16,9 @@ export default function Home() {
       <Body>
         <article>
           <p>Welcome the weather forecaster</p>
+          <Link href="/forecast">
+            <a>Get started</a>
+          </Link>
         </article>
       </Body>
     </div>

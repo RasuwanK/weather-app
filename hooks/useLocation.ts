@@ -27,5 +27,10 @@ export function useLocation() {
     };
   }, []);
 
-  return { location, isLoading, error, timestamp };
+  return {
+    location,
+    isLocationLoading: isLoading,
+    locationError: error,
+    timestamp,
+  };
 }

@@ -1,7 +1,7 @@
 import Head from "next/head";
-import { useEffect } from "react";
 import { Body } from "../components/body/body";
 import { useLocation } from "../hooks/useLocation";
+import useSwr from 'swr'
 
 export default function Forecast() {
   // Used to detect live location

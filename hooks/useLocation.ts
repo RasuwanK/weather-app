@@ -25,7 +25,7 @@ export function useLocation() {
     return () => {
       stopLocation(location.id);
     };
-  });
+  }, []);
 
   return { location, isLoading, error, timestamp };
 }

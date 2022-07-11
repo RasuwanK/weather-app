@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Body } from "../components/body/body";
 import Link from "next/link";
 
 export default function Home() {
@@ -8,14 +7,14 @@ export default function Home() {
       <Head>
         <title>Weather App</title>
       </Head>
-      <Body>
+      <div>
         <article>
           <p>Welcome the weather forecaster</p>
           <Link href="/forecast">
             <a>Get started</a>
           </Link>
         </article>
-      </Body>
+      </div>
     </div>
   );
 }

@@ -6,11 +6,11 @@ const fetcher = (url: string) =>
     method: "GET",
   }).then((res) => res.json());
 
-export function useWeather(location: GeolocationCoordinates | undefined) {
+export function useWeather(location: GeolocationCoordinates) {
   const generateUrl = (
     apiKey: string,
-    longitude: string | undefined,
-    latitude: string | undefined,
+    longitude: string,
+    latitude: string,
     units: string
   ) => {
     return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;

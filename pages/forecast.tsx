@@ -1,7 +1,38 @@
 import Head from "next/head";
-import { useLocation } from "../hooks/useLocation";
+import { MainForecast } from "../components/main-forecast";
 import { useWeather } from "../hooks/useWeather";
 import { ForecastPageProps } from "../interfaces/props";
+import { MainContentProps } from "../interfaces/props";
+
+function MainContent({
+  isLocationLoading,
+  locationError,
+  isWeatherLoading,
+  data,
+  weatherError,
+}: MainContentProps) {
+  if (isLocationLoading) {
+    return <p>Waiting for location</p>;
+  }
+
+  if (locationError) {
+    <p>
+      Sorry to say that, without location service we are unable to provide your
+      weather forecast
+    </p>;
+  }
+
+  return (
+    <div>
+      <Head>
+        <title>Weather forecast</title>
+      </Head>
+      <div className="bg-clear-sky-day bg-contain bg-no-repeat">
+        {!isWeatherLoading && !weatherError && <MainForecast data={data} />}
+      </div>
+    </div>
+  );
+}
 
 export default function Forecast({
   location,
@@ -15,19 +46,16 @@ export default function Forecast({
   return (
     <div>
       <Head>
-        <title>Weather forecast</title>
+        <title>Weather Forecast</title>
       </Head>
       <div>
-        <article id="main-forecast" className="">
-          <section id="main-section">
-            <div id="weather-text">{data?.weather[0].main}</div>
-            <div id="weather-description-text">
-              {data?.weather[0].description}
-            </div>
-            <div id="temp-text">Temperature {data?.main.temp}</div>
-            <div id="temp-feels-text">Feels Like {data?.main.feels_like}</div>
-          </section>
-        </article>
+        <MainContent
+          isLocationLoading={isLocationLoading}
+          locationError={locationError}
+          isWeatherLoading={isWeatherLoading}
+          data={data}
+          weatherError={weatherError}
+        />
       </div>
     </div>
   );

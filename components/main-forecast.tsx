@@ -8,7 +8,7 @@ export function MainForecast({ data }: MainForecastProps) {
     return (
       <article
         id="main-forecast"
-        className={`grid grid-cols-1 grid-rows-1 backdrop-blur-sm p-5 bg-[${color}] text-[#13130c] drop-shadow-lg w-full`}
+        className={`grid grid-cols-1 grid-rows-1 p-5 bg-[${color}] text-white drop-shadow-lg w-full`}
       >
         <section id="main-section">
           <div id="weather-text" className="font-bold text-6xl my-3 flex">

@@ -18,7 +18,7 @@ export default function Forecast({
       <Head>
         <title>Weather Forecast</title>
       </Head>
-      <div className="grid grid-cols-1 bg-yellow-200 bg-repeat bg-cover w-full">
+      <div className="grid grid-cols-1 bg-green-800 bg-repeat bg-cover w-full">
         {!locationError && location && <MainForecast data={data} />}
       </div>
     </div>

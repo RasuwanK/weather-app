@@ -2,7 +2,7 @@
 
 const backgroundImages = {
   clearSkyDay:
-    "https://images.wallpaperscraft.com/image/single/palm_tree_branch_tropics_111142_1280x720.jpg",
+    "https://images.wallpaperscraft.com/image/single/mountains_sky_top_114977_1280x720.jpg",
   clearSkyNight:
     "https://images.wallpaperscraft.com/image/single/night_moon_sky_138549_1280x720.jpg",
   cloudySkyDay:
@@ -33,22 +33,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        "clear-sky-day": `url('${backgroundImages.clearSkyDay}')`,
-        "clear-sky-night": `url(${backgroundImages.clearSkyNight})`,
-        "cloudy-sky-day": `url(${backgroundImages.cloudySkyDay})`,
-        "cloudy-sky-night": `url(${backgroundImages.cloudySkyNight})`,
-        "rain-day": `url(${backgroundImages.rainDay})`,
-        "rain-night": `url(${backgroundImages.rainNight})`,
-        "thunder-day": `url(${backgroundImages.thunderDay})`,
-        "thunder-night": `url(${backgroundImages.thunderNight})`,
-        "snow-day": `url(${backgroundImages.snowDay})`,
-        "snow-night": `url(${backgroundImages.snowNight})`,
-        "mist-night": `url(${backgroundImages.mistNight})`,
-        "mist-day": `url(${backgroundImages.mistDay})`,
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

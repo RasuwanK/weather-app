@@ -4,36 +4,6 @@ import { useWeather } from "../hooks/useWeather";
 import { ForecastPageProps } from "../interfaces/props";
 import { MainContentProps } from "../interfaces/props";
 
-function MainContent({
-  isLocationLoading,
-  locationError,
-  isWeatherLoading,
-  data,
-  weatherError,
-}: MainContentProps) {
-  if (isLocationLoading) {
-    return <p>Waiting for location</p>;
-  }
-
-  if (locationError) {
-    <p>
-      Sorry to say that, without location service we are unable to provide your
-      weather forecast
-    </p>;
-  }
-
-  return (
-    <div>
-      <Head>
-        <title>Weather forecast</title>
-      </Head>
-      <div className="bg-clear-sky-day bg-contain bg-no-repeat">
-        {!isWeatherLoading && !weatherError && <MainForecast data={data} />}
-      </div>
-    </div>
-  );
-}
-
 export default function Forecast({
   location,
   isLocationLoading,
@@ -48,14 +18,8 @@ export default function Forecast({
       <Head>
         <title>Weather Forecast</title>
       </Head>
-      <div>
-        <MainContent
-          isLocationLoading={isLocationLoading}
-          locationError={locationError}
-          isWeatherLoading={isWeatherLoading}
-          data={data}
-          weatherError={weatherError}
-        />
+      <div className="grid grid-cols-1 bg-clear-sky-day bg-no-repeat bg-cover h-[1000px]">
+        {!locationError  &&  location && <MainForecast data={data} />}
       </div>
     </div>
   );

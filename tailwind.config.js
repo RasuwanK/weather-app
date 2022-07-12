@@ -2,29 +2,29 @@
 
 const backgroundImages = {
   clearSkyDay:
-    "https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/palm_tree_branch_tropics_111142_1280x720.jpg",
   clearSkyNight:
-    "https://images.pexels.com/photos/6510358/pexels-photo-6510358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/night_moon_sky_138549_1280x720.jpg",
   cloudySkyDay:
-    "https://images.pexels.com/photos/5341778/pexels-photo-5341778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/clouds_sky_cloudy_178719_1280x720.jpg",
   cloudySkyNight:
-    "https://images.pexels.com/photos/4715753/pexels-photo-4715753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/clouds_sky_night_114899_1280x720.jpg",
   rainDay:
-    "https://images.pexels.com/photos/913807/pexels-photo-913807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/leaf_rain_sad_163466_1280x720.jpg",
   rainNight:
-    "https://images.pexels.com/photos/5331875/pexels-photo-5331875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/rain_drops_spray_130959_1280x720.jpg",
   thunderDay:
-    "https://images.pexels.com/photos/2418664/pexels-photo-2418664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/lightning_thunderstorm_cloudy_126444_1280x720.jpg",
   thunderNight:
-    "https://images.pexels.com/photos/2531709/pexels-photo-2531709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/lightning_thunderstorm_cloudy_126444_1280x720.jpg",
   snowDay:
-    "https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/hill_snow_winter_92514_1280x720.jpg",
   snowNight:
-    "https://images.pexels.com/photos/1417647/pexels-photo-1417647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/snow_trees_northern_lights_199451_1280x720.jpg",
   mistNight:
-    "https://images.pexels.com/photos/358235/pexels-photo-358235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/fog_trees_hills_147477_1280x720.jpg",
   mistDay:
-    "https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.wallpaperscraft.com/image/single/forest_fog_darkness_195631_1280x720.jpg",
 };
 
 module.exports = {

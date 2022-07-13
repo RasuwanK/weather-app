@@ -1,5 +1,5 @@
 
-interface ILocationContext {
+export interface ILocationContext {
     location: GeolocationCoordinates | undefined
     isLocationLoading: boolean
     locationError: GeolocationPositionError | undefined

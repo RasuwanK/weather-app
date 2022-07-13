@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { ILocationContext } from "../interfaces/context";
 
 export const LocationContext = createContext<ILocationContext>({
     location: undefined,

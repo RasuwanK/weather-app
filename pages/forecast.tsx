@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { MainForecast } from "../components/main-forecast";
 import { useWeather } from "../hooks/useWeather";
 import { ForecastPageProps } from "../interfaces/props";
 import { MainContentProps } from "../interfaces/props";
 import { useTheme } from "../hooks/useTheme";
+import { CurrentWeather } from "../components/current-weather";
+import { useEffect } from "react";
 
 export default function Forecast({
   location,
@@ -24,9 +25,7 @@ export default function Forecast({
         className={"grid grid-cols-1 bg-repeat bg-cover w-full ".concat(
           `${theme.bg} ${theme.fg}`
         )}
-      >
-        {!locationError && location && <MainForecast data={data} />}
-      </div>
+      ></div>
     </div>
   );
 }

@@ -24,8 +24,5 @@ export function useWeather(location: GeolocationCoordinates) {
     ),
     fetcher
   );
-
-  console.log(location);
-
   return { data, isWeatherLoading: !data && !error, weatherError: error };
 }

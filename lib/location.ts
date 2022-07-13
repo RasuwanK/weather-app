@@ -4,18 +4,9 @@
 //const minute = 1000 * 60;
 
 export function Location() {
-  let id: number = -1;
-
-  return {
-    id,
-    promise: new Promise<GeolocationPosition>((resolve, reject) => {
-      id = navigator.geolocation.watchPosition(resolve, reject, config);
-    }),
-  };
-}
-
-export function stopLocation(id: number) {
-  navigator.geolocation.clearWatch(id);
+  return new Promise<GeolocationPosition>((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, config);
+  });
 }
 
 export const config = {

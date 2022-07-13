@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Location, stopLocation } from "../lib/location";
+import { Location } from "../lib/location";
 
 // Custom hook that will return live location of the user
 export function useLocation() {
@@ -9,28 +9,21 @@ export function useLocation() {
   const [timestamp, setTimestamp] = useState<number>();
 
   useEffect(() => {
-    const location = Location();
-    location.promise
+    Location()
       .then((location) => {
         setLocation(location.coords);
-        setTimestamp(location.timestamp);
         setIsLoading(false);
+        setTimestamp(timestamp);
       })
       .catch((error) => {
         setError(error);
         setIsLoading(false);
-        stopLocation(location.id);
       });
-
-    return () => {
-      stopLocation(location.id);
-    };
   }, []);
 
   return {
     location,
     isLocationLoading: isLoading,
     locationError: error,
-    timestamp,
   };
 }

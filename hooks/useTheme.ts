@@ -41,9 +41,7 @@ const themes = {
 };
 
 export function useTheme(weatherId: number | undefined): Theme {
-  if (typeof weatherId === "undefined") {
-    return themes.default;
-  } else {
+  if (typeof weatherId !== "undefined") {
     if (weatherId >= 200 && weatherId <= 232) {
       return themes.thunderstorm;
     } else if (weatherId >= 300 && weatherId <= 321) {
@@ -61,5 +59,7 @@ export function useTheme(weatherId: number | undefined): Theme {
     } else {
       return themes.default;
     }
+  }else {
+    return themes.default;
   }
 }

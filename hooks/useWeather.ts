@@ -6,15 +6,20 @@ const fetcher = (url: string) =>
     method: "GET",
   }).then((res) => res.json());
 
-export function useWeather(location: GeolocationCoordinates) {
+export function useWeather(location: GeolocationCoordinates | undefined) {
   const generateUrl = (
     apiKey: string,
-    longitude: string,
-    latitude: string,
+    longitude: string | undefined,
+    latitude: string | undefined,
     units: string
   ) => {
-    return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
+    if (typeof location !== "undefined") {
+      return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
+    } else {
+      return ``;
+    }
   };
+  
   const { data, error } = useSWR<WeatherData, any>(
     generateUrl(
       "edce4dcfe8fd9291e28d45aa56cac0c8",
@@ -24,5 +29,9 @@ export function useWeather(location: GeolocationCoordinates) {
     ),
     fetcher
   );
-  return { data, isWeatherLoading: !data && !error, weatherError: error };
+  return {
+    data,
+    isWeatherLoading: !data && !error,
+    weatherError: typeof location === "undefined" || error,
+  };
 }

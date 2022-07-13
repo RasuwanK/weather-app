@@ -8,17 +8,19 @@ export function CurrentWeather({
   weatherIcon,
 }: CurrentWeatherProps) {
   return (
-    <article id="current-weather" className="">
-      <section id="weather-main">
+    <article id="current-weather" className="grid grid-cols-1 p-3">
+      <section id="weather-main" className="grid">
         <div id="weather-icon">
-            <FontAwesomeIcon icon={weatherIcon} />
+          <FontAwesomeIcon icon={weatherIcon} />
         </div>
-        <div id="weather-text">
-            {main}
-        </div>
+        <div id="weather-text">{main}</div>
       </section>
-      <section id="weather-description">{description}</section>
-      <section id="temperature">{temperature}</section>
+      <section id="weather-description" className="">
+        {description}
+      </section>
+      <section id="temperature" className="">
+        {temperature}
+      </section>
     </article>
   );
 }

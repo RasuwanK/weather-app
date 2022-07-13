@@ -6,6 +6,7 @@
 export function Location() {
   return new Promise<GeolocationPosition>((resolve, reject) => {
     if (typeof navigator !== "undefined") {
+      // I have not written any code to stop watchPosition();
       navigator.geolocation.watchPosition(resolve, reject, config);
     }
   });

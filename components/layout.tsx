@@ -2,20 +2,9 @@ import { ReactNode, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { Time } from "../interfaces/hooks";
+import { LayoutProps } from "../interfaces/props";
 
-interface LayoutProps {
-  children: ReactNode;
-  time: Time;
-  isLocationLoading: boolean;
-  locationError: GeolocationPositionError | undefined;
-}
-
-export default function Layout({
-  children,
-  time,
-  isLocationLoading,
-  locationError,
-}: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <div>
       <Navbar />

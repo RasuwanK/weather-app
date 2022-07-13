@@ -5,14 +5,11 @@ import { MainContentProps } from "../interfaces/props";
 import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useEffect } from "react";
+import { useLocation } from "../hooks/useLocation";
 
-export default function Forecast({
-  location,
-  isLocationLoading,
-  locationError,
-  timestamp,
-}: ForecastPageProps) {
+export default function Forecast({}: ForecastPageProps) {
   // Used to detect live location
+  const { location, isLocationLoading, locationError } = useLocation();
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const theme = useTheme(data?.weather[0].id);
 

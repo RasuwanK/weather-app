@@ -6,9 +6,6 @@ import { useClock } from "../hooks/useClock";
 import { useState } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { location, isLocationLoading, locationError } = useLocation();
-  //const time = useClock();
-
   const getGreeting = (hours: number | string) => {
     if (+hours >= 0 && +hours <= 12) {
       return "morning";
@@ -22,17 +19,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <Layout
-      time={time}
-      isLocationLoading={isLocationLoading}
-      locationError={locationError}
-    >
-      <Component
-        {...pageProps}
-        location={location}
-        isLocationLoading={isLocationLoading}
-        locationError={locationError}
-      />
+    <Layout>
+      <Component {...pageProps} />
     </Layout>
   );
 }

@@ -5,7 +5,9 @@
 
 export function Location() {
   return new Promise<GeolocationPosition>((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject, config);
+    if (typeof navigator !== "undefined") {
+      navigator.geolocation.watchPosition(resolve, reject, config);
+    }
   });
 }
 

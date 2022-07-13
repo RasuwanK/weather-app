@@ -8,18 +8,16 @@ export function useLocation() {
   const [error, setError] = useState<GeolocationPositionError>();
   //const [timestamp, setTimestamp] = useState<number>();
 
-  useEffect(() => {
-    Location()
-      .then((location) => {
-        setLocation(location.coords);
-        setIsLoading(false);
-        //setTimestamp(timestamp);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-  }, []);
+  Location()
+    .then((location) => {
+      setLocation(location.coords);
+      setIsLoading(false);
+      //setTimestamp(timestamp);
+    })
+    .catch((error) => {
+      setError(error);
+      setIsLoading(false);
+    });
 
   return {
     location,

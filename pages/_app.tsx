@@ -4,9 +4,10 @@ import Layout from "../components/layout";
 import { useLocation } from "../hooks/useLocation";
 import { useClock } from "../hooks/useClock";
 import { useState } from "react";
+import { LocationContext } from "../context/context";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { location, isLocationLoading, locationError, timestamp } =
+  const { location, isLocationLoading, locationError } =
     useLocation();
   const time = useClock();
 
@@ -23,19 +24,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <Layout
-      time={time}
-      isLocationLoading={isLocationLoading}
-      locationError={locationError}
+    <LocationContext.Provider
+      value={{
+        location,
+        isLocationLoading,
+        locationError
+      }}
     >
-      <Component
-        {...pageProps}
-        location={location}
+      <Layout
+        time={time}
         isLocationLoading={isLocationLoading}
         locationError={locationError}
-        timestamp={timestamp}
-      />
-    </Layout>
+      >
+        <Component
+          {...pageProps}
+        />
+      </Layout>
+    </LocationContext.Provider>
   );
 }
 

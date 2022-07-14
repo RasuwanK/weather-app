@@ -63,31 +63,24 @@ export default function Forecast() {
         <Main>
           <p>Weather data is loading</p>
         </Main>;
-      } else if(weatherError) {
+      } else if (weatherError) {
         <Main>
           <p>Weather data {`couldn't`} fetch</p>
-        </Main>
+        </Main>;
       }
     }
   }
 
   return (
-    <div>
-      <Head>
-        <title>Weather Forecast</title>
-      </Head>
-      <div
-        className={"grid grid-cols-1 w-full ".concat(`${theme.bg} ${theme.fg}`)}
-      >
-        <div className="" id="current-weather-container">
-          <CurrentWeather
-            main={data?.weather[0].main}
-            temperature={data?.main.temp}
-            description={data?.weather[0].description}
-            weatherIcon={faSun}
-          />
-        </div>
+    <Main>
+      <div id="current-weather-container" className="w-full">
+        <CurrentWeather
+          main={data?.weather[0].main}
+          temperature={data?.main.temp}
+          description={data?.weather[0].description}
+          weatherIcon={faSun}
+        />
       </div>
-    </div>
+    </Main>
   );
 }

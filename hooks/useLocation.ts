@@ -1,27 +1,38 @@
 import { useState, useEffect } from "react";
-import { Location } from "../lib/location";
 
-// Custom hook that will return live location of the user
 export function useLocation() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [location, setLocation] = useState<GeolocationCoordinates>();
-  const [error, setError] = useState<GeolocationPositionError>();
-  //const [timestamp, setTimestamp] = useState<number>();
+  const [isLocationLoading, setLocationLoading] = useState<boolean>(true);
+  const [locationError, setLocationError] =
+    useState<GeolocationPositionError>();
+  const [noLocation, setNoLocation] = useState<boolean>(false);
 
-  Location()
-    .then((location) => {
-      setLocation(location.coords);
-      setIsLoading(false);
-      //setTimestamp(timestamp);
-    })
-    .catch((error) => {
-      setError(error);
-      setIsLoading(false);
-    });
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      if ("geolocation" in navigator) {
+        setLocationLoading(true);
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLocation(position.coords);
+            setLocationLoading(false);
+          },
+          (error) => {
+            setLocationLoading(false);
+            setLocationError(error);
+          }
+        );
+      } else {
+        setLocationLoading(false);
+        setLocation(undefined);
+        setNoLocation(true);
+      }
+    }
+  }, []);
 
   return {
     location,
-    isLocationLoading: isLoading,
-    locationError: error,
+    isLocationLoading,
+    locationError,
+    noLocation,
   };
 }

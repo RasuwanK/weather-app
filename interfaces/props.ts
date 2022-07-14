@@ -26,8 +26,8 @@ export interface MainContentProps {
 }
 
 export interface CurrentWeatherProps {
-  main: string;
-  description: string;
-  temperature: number;
-  weatherIcon: IconProp;
+  main: string | undefined;
+  description: string | undefined;
+  temperature: number | undefined;
+  weatherIcon: IconProp | undefined;
 }

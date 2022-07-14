@@ -15,11 +15,8 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
   ) => {
     if (typeof location !== "undefined") {
       return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
-    } else {
-      return ``;
-    }
+    } 
   };
-  
   const { data, error } = useSWR<WeatherData, any>(
     generateUrl(
       "edce4dcfe8fd9291e28d45aa56cac0c8",
@@ -29,9 +26,12 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     ),
     fetcher
   );
+
+  //console.log(data);
+
   return {
     data,
-    isWeatherLoading: !data && !error,
+    isWeatherLoading: !data,
     weatherError: typeof location === "undefined" || error,
   };
 }

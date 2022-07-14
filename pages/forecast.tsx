@@ -28,6 +28,11 @@ export default function Forecast() {
     console.log("Rendered !");
   });
 
+  if (noLocation) {
+    console.error("No geolocation in the browser, internal error !");
+    return <p>No geolocation functionality awailable in the browser</p>;
+  }
+
   if (isLocationLoading) {
     return (
       <Main>
@@ -35,24 +40,34 @@ export default function Forecast() {
       </Main>
     );
   } else {
-    if (locationError?.PERMISSION_DENIED) {
+    if (locationError?.code === 1) {
       return (
         <Main>
           <p>Location permission error</p>
         </Main>
       );
-    } else if (locationError?.POSITION_UNAVAILABLE) {
+    } else if (locationError?.code === 2) {
       return (
         <Main>
           <p>Location unvailable</p>
         </Main>
       );
-    } else if (locationError?.TIMEOUT) {
+    } else if (locationError?.code === 3) {
       return (
         <Main>
-          <p>Location timeout errro</p>
+          <p>Location timeout error</p>
         </Main>
       );
+    } else {
+      if (isWeatherLoading) {
+        <Main>
+          <p>Weather data is loading</p>
+        </Main>;
+      } else if(weatherError) {
+        <Main>
+          <p>Weather data {`couldn't`} fetch</p>
+        </Main>
+      }
     }
   }
 

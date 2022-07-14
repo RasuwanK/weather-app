@@ -15,7 +15,7 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
   ) => {
     if (typeof location !== "undefined") {
       return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
-    } 
+    }
   };
   const { data, error } = useSWR<WeatherData, any>(
     generateUrl(
@@ -26,8 +26,6 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     ),
     fetcher
   );
-
-  //console.log(data);
 
   return {
     data,

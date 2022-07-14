@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 
+const second = 1000;
+const minute = second * 60;
+
 export function useLocation() {
   const [location, setLocation] = useState<GeolocationCoordinates>();
-  const [isLocationLoading, setLocationLoading] = useState<boolean>(true);
+  const [isLocationLoading, setLocationLoading] = useState<boolean>(false);
   const [locationError, setLocationError] =
     useState<GeolocationPositionError>();
   const [noLocation, setNoLocation] = useState<boolean>(false);
@@ -19,7 +22,8 @@ export function useLocation() {
           (error) => {
             setLocationLoading(false);
             setLocationError(error);
-          }
+          },
+          { timeout: minute * 5, enableHighAccuracy: true, maximumAge: 0 }
         );
       } else {
         setLocationLoading(false);

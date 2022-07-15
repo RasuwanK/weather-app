@@ -77,8 +77,6 @@ export default function Forecast() {
           backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
         }}
       >
-        <p>{JSON.stringify(data, null, ' ')}</p>
-        <p>{JSON.stringify(location, null, ' ')}</p>
         <CurrentWeather
           main={data?.weather[0].main}
           temperature={data?.main.temp}

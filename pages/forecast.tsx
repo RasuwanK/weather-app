@@ -4,16 +4,16 @@ import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useLocation } from "../hooks/useLocation";
 import { faSun } from "@fortawesome/free-regular-svg-icons";
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 
 function Main({ children }: any) {
   return (
-    <div>
+    <Fragment>
       <Head>
         <title>Weather forecast</title>
       </Head>
-      <div>{children}</div>
-    </div>
+      <Fragment>{children}</Fragment>
+    </Fragment>
   );
 }
 
@@ -59,21 +59,24 @@ export default function Forecast() {
         </Main>
       );
     } else {
-      if (isWeatherLoading) {
-        <Main>
-          <p>Weather data is loading</p>
-        </Main>;
-      } else if (weatherError) {
-        <Main>
-          <p>Weather data {`couldn't`} fetch</p>
-        </Main>;
+      if (weatherError) {
+        return (
+          <Main>
+            <p>Weather data {`couldn't`} fetch</p>
+          </Main>
+        );
       }
     }
   }
 
   return (
     <Main>
-      <div id="current-weather-container" className="w-full">
+      <div
+        id="forecast-page"
+        style={{
+          backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+        }}
+      >
         <CurrentWeather
           main={data?.weather[0].main}
           temperature={data?.main.temp}

@@ -29,7 +29,7 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
 
   return {
     data,
-    isWeatherLoading: !data,
+    isWeatherLoading: !data && !error,
     weatherError: typeof location === "undefined" || error,
   };
 }

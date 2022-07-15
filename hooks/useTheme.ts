@@ -1,46 +1,39 @@
-import { useState } from "react";
-
-interface Theme {
-  bg: string;
-  fg: string;
-}
-
 const themes = {
   default: {
-    bg: "bg-gradient-to-r from-[#B8DA82] to-[#1ECCC7]",
+    bg: { from: "#B8DA82", to: "#1ECCC7" },
     fg: "text-black",
   },
   clear: {
-    bg: "bg-gradient-to-r from-[#F2BE6F] to-[#F6C881]",
+    bg: { from: "#F2BE6F", to: "#F6C881" },
     fg: "text-black",
   },
   clouds: {
-    bg: "bg-gradient-to-r from-[#C0C9DA] to-[#8BF3F0]",
+    bg: { from: "#C0C9DA", to: "#8BF3F0" },
     fg: "text-black",
   },
   atmosphere: {
-    bg: "bg-gradient-to-r from-[#A5DDEA] to-[#49A58F]",
+    bg: { from: "#A5DDEA", to: "#49A58F" },
     fg: "text-black",
   },
   snow: {
-    bg: "bg-gradient-to-r from-[#CEE2FF] to-[#A8B4DE]",
+    bg: { from: "#CEE2FF", to: "#A8B4DE" },
     fg: "text-black",
   },
   rain: {
-    bg: "bg-gradient-to-r from-[#D4D8D9] to-[#858586]",
+    bg: { from: "#D4D8D9", to: "#858586" },
     fg: "text-black",
   },
   drizzle: {
-    bg: "bg-gradient-to-r from-[#505555] to-[#3A3B40]",
+    bg: { from: "#505555", to: "#3A3B40" },
     fg: "text-black",
   },
   thunderstorm: {
-    bg: "bg-gradient-to-r from-[#151818] to-[#111113]",
+    bg: { from: "#151818", to: "#111113" },
     fg: "text-white",
   },
 };
 
-export function useTheme(weatherId: number | undefined): Theme {
+export function useTheme(weatherId: number | undefined) {
   if (typeof weatherId !== "undefined") {
     if (weatherId >= 200 && weatherId <= 232) {
       return themes.thunderstorm;
@@ -59,7 +52,7 @@ export function useTheme(weatherId: number | undefined): Theme {
     } else {
       return themes.default;
     }
-  }else {
+  } else {
     return themes.default;
   }
 }

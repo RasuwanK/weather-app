@@ -14,7 +14,7 @@ export function useLocation() {
     if (typeof navigator !== "undefined") {
       if ("geolocation" in navigator) {
         setLocationLoading(true);
-        navigator.geolocation.getCurrentPosition(
+        navigator.geolocation.watchPosition(
           (position) => {
             setLocation(position.coords);
             setLocationLoading(false);

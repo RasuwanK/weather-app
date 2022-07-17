@@ -1,9 +1,9 @@
 import { CurrentWeatherProps } from "../interfaces/props";
 
 export function CurrentWeather() {
-  if(typeof window !== "undefined") {
+  let data = null;
+  if (typeof window !== "undefined") {
     const container = localStorage.getItem("weather-data");
-    let data = null;
     if (container !== "pending") {
       data = JSON.parse(container!);
     }
@@ -23,10 +23,10 @@ export function CurrentWeather() {
         className="grid grid-cols-1 grid-rows-3 items-center"
       >
         <div id="main" className="text-6xl">
-          {data?.main}
+          {data.main}
         </div>
         <div id="description" className="text-3xl">
-          {data?.description}
+          {data.description}
         </div>
         <div id="temperatue" className="text-2xl">
           {data.temp}

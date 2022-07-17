@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import useSWR from "swr";
 import { WeatherData } from "../interfaces/weather-data";
-import { getCache, setCache } from "../lib/cache";
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -38,13 +37,16 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     fetcher
   );
 
+  // Caching the newest fetching value
   useEffect(() => {
-    setCache(data);
+    if (data) {
+      localStorage.setItem("weather-data", JSON.stringify(data));
+    }
   });
 
   return {
-    data: data ? data : getCache(),
-    isWeatherLoading: !data && !error && !getCache(),
+    data: data,
+    isWeatherLoading: !data && !error,
     weatherError: error,
   };
 }

@@ -3,7 +3,9 @@ import { useWeather } from "../hooks/useWeather";
 import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useLocation } from "../hooks/useLocation";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useState } from "react";
+import { WeatherData } from "../interfaces/weather-data";
 
 function Main({ children }: any) {
   return (
@@ -20,7 +22,14 @@ export default function ForecastPage() {
   // Used to detect live location
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
-  const { data, isWeatherLoading ,weatherError } = useWeather(location);
+  const { data, isWeatherLoading, weatherError } = useWeather(location);
+  const [cachedData, setCachedData] = useState<WeatherData>();
+
+  useEffect(() => {
+    const cache = localStorage.getItem("weather-data");
+    setCachedData(JSON.parse(cache!));
+  }, [data]);
+
   //const theme = useTheme(data?.weather[0].id);
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
@@ -52,47 +61,29 @@ export default function ForecastPage() {
           <p>Location timeout error</p>
         </Main>
       );
-    } else {
-      if(isWeatherLoading) {
-        return (
-          <Main>
-            <p>Loading weather</p>
-          </Main>
-        )
-      } else if (weatherError) {
-        return (
-          <Main>
-            <p>Weather data error</p>
-          </Main>
-        );
-      } else {
-        if(Object.keys(data).length <= 2) {
-          return (
-            <Main>
-              <p>Error with the API</p>
-            </Main>
-          )
-        }
-      }
     }
-  }
 
-  return (
-    <Main>
-      <div
-        id="forecast-page"
-        style={
-          {
-            //backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+    return (
+      <Main>
+        <div
+          id="forecast-page"
+          style={
+            {
+              //backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+            }
           }
-        }
-      >
-        <CurrentWeather
-          main={data?.weather[0].main}
-          description={data?.weather[0].description}
-          temperature={data?.main.temp}
-        />
-      </div>
-    </Main>
-  );
+        >
+          {isWeatherLoading && "Loading weather data"}
+          {weatherError && !isWeatherLoading && "Error in weather data"}
+          <CurrentWeather
+            main={data?.weather[0].main || cachedData?.weather[0].main}
+            description={
+              data?.weather[0].description || cachedData?.weather[0].description
+            }
+            temperature={data?.main.temp || cachedData?.main.temp}
+          />
+        </div>
+      </Main>
+    );
+  }
 }

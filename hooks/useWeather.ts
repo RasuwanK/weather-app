@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { WeatherData } from "../interfaces/weather-data";
 
@@ -5,6 +6,24 @@ const fetcher = (url: string) =>
   fetch(url, {
     method: "GET",
   }).then((res) => res.json());
+
+const client = () => typeof window !== "undefined";
+
+function getCache(): WeatherData | undefined {
+  if(client()) {
+    if(localStorage.getItem('weather-data')) {
+      return JSON.parse(localStorage.getItem('weather-data')!);
+    }
+  }
+}
+
+function setCache(data: WeatherData | undefined) {
+  if(client()) {
+    if(data) {
+      localStorage.setItem('weather-data', JSON.stringify(data));
+    }
+  }
+}
 
 export function useWeather(location: GeolocationCoordinates | undefined) {
   const generateUrl = (
@@ -15,6 +34,8 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
   ) => {
     if (typeof location !== "undefined") {
       return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
+    } else {
+      ("");
     }
   };
 
@@ -28,8 +49,10 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     fetcher
   );
 
+  setCache(data);
+
   return {
-    data,
+    data: data || getCache(),
     isWeatherLoading: !data && !error,
     weatherError: typeof location === "undefined" || error,
   };

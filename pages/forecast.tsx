@@ -4,9 +4,7 @@ import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useLocation } from "../hooks/useLocation";
 import { useEffect, Fragment } from "react";
-import { WeatherData } from "../interfaces/weather-data";
-import { useState } from "react";
-import { SWRConfig } from "swr";
+import { SWRConfig, useSWRConfig } from "swr";
 
 function Main({ children }: any) {
   return (
@@ -19,25 +17,13 @@ function Main({ children }: any) {
   );
 }
 
-function localStorageProvider() {
-  const map = new Map(JSON.parse(localStorage.getItem("app-cache") || "[]"));
-  window.addEventListener("beforeunload", () => {
-    const appCache = JSON.stringify(Array.from(map.entries()));
-    localStorage.setItem("app-cache", appCache);
-  });
-  return map;
-}
-
 export default function Forecast() {
   // Used to detect live location
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const theme = useTheme(data?.weather[0].id);
-  
-  useEffect(() => {
-    localStorage.setItem('app-name', 'Apple');
-  }, []);
+  const { cache } = useSWRConfig();
 
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
@@ -82,7 +68,6 @@ export default function Forecast() {
 
   return (
     <Main>
-      <SWRConfig value={{ provider: localStorageProvider }}>
         <div
           id="forecast-page"
           style={{
@@ -95,7 +80,6 @@ export default function Forecast() {
             temperature={data?.main.temp}
           />
         </div>
-      </SWRConfig>
     </Main>
   );
 }

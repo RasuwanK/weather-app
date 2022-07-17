@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const second = 1000;
 const minute = second * 60;
 
+// This hook watches the current location realtime
 export function useLocation() {
   const [location, setLocation] = useState<GeolocationCoordinates>();
   const [isLocationLoading, setLocationLoading] = useState<boolean>(false);

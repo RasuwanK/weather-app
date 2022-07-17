@@ -3,7 +3,7 @@ import { useWeather } from "../hooks/useWeather";
 import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useLocation } from "../hooks/useLocation";
-import { useEffect, Fragment } from "react";
+import { Fragment } from "react";
 
 function Main({ children }: any) {
   return (
@@ -21,7 +21,7 @@ export default function ForecastPage() {
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
   const { data, isWeatherLoading, weatherError } = useWeather(location);
-  const theme = useTheme(data?.weather[0].id);
+  //const theme = useTheme(data?.weather[0].id);
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
     return <p>No geolocation functionality awailable in the browser</p>;
@@ -53,12 +53,18 @@ export default function ForecastPage() {
         </Main>
       );
     } else {
-      if (weatherError) {
+      if (isWeatherLoading) {
         return (
           <Main>
-            <p>Weather data {`couldn't`} fetch</p>
+            <p>Weather data loading</p>
           </Main>
         );
+      } else if(weatherError){
+        return (
+          <Main>
+            <p>Weather data error</p>
+          </Main>
+        )
       }
     }
   }
@@ -68,7 +74,7 @@ export default function ForecastPage() {
       <div
         id="forecast-page"
         style={{
-          backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+          //backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
         }}
       >
         <CurrentWeather

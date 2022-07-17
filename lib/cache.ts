@@ -1,7 +1,9 @@
 import { WeatherData } from "../interfaces/weather-data";
 
+// Simple check for the client side
 const client = () => typeof window !== "undefined";
 
+// This retrieves what useWeather has cached
 export function getCache(): WeatherData {
   let data;
   if (client()) {
@@ -12,6 +14,7 @@ export function getCache(): WeatherData {
   return data;
 }
 
+// This set the caching of useWeather hook
 export function setCache(data: WeatherData | undefined) {
   if (client()) {
     if (data) {

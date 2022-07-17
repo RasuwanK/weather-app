@@ -31,9 +31,15 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
 
   if (typeof window !== "undefined") {
     if (typeof data !== "undefined") {
-      localStorage.setItem("weather-data", JSON.stringify(data));
-    } else {
-      localStorage.setItem('weather-data', 'pending');
+      if (localStorage.getItem("weather-data")) {
+        if (
+          JSON.parse(localStorage.getItem("weather-data")!).id !==
+          data.weather[0].id
+        )
+          localStorage.setItem("weather-data", JSON.stringify(data.weather[0]));
+      } else {
+        localStorage.setItem("weather-data", "pending");
+      }
     }
   }
 

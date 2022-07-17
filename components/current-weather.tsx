@@ -21,13 +21,13 @@ export function CurrentWeather() {
         className="grid grid-cols-1 grid-rows-3 items-center"
       >
         <div id="main" className="text-6xl">
-          {data?.weather[0].main}
+          {data?.main}
         </div>
         <div id="description" className="text-3xl">
-          {data?.weather[0].description}
+          {data?.description}
         </div>
         <div id="temperatue" className="text-2xl">
-          {data?.main.temp}
+          {data.temp}
         </div>
       </section>
     </article>

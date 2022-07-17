@@ -41,7 +41,7 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
 
   return {
     data: data ? data : getCache(),
-    //isWeatherLoading: !data && !error,
+    isWeatherLoading: !data && !error && !getCache(),
     weatherError: typeof location === "undefined" || error,
   };
 }

@@ -20,7 +20,7 @@ export default function ForecastPage() {
   // Used to detect live location
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
-  const { data, weatherError } = useWeather(location);
+  const { data, isWeatherLoading ,weatherError } = useWeather(location);
   //const theme = useTheme(data?.weather[0].id);
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
@@ -53,6 +53,14 @@ export default function ForecastPage() {
         </Main>
       );
     } else {
+      if(isWeatherLoading) {
+        return (
+          <Main>
+            <p>Loading weather</p>
+          </Main>
+        )
+      }
+
       if (weatherError) {
         return (
           <Main>

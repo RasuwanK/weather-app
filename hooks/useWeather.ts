@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useSWR from "swr";
 import { WeatherData } from "../interfaces/weather-data";
 import { getCache, setCache } from "../lib/cache";
@@ -37,7 +38,9 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     fetcher
   );
 
-  setCache(data);
+  useEffect(() => {
+    setCache(data);
+  })
 
   return {
     data: data ? data : getCache(),

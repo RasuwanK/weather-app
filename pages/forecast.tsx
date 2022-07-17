@@ -3,8 +3,9 @@ import { useWeather } from "../hooks/useWeather";
 import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useLocation } from "../hooks/useLocation";
-import { faSun } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, Fragment } from "react";
+import { WeatherData } from "../interfaces/weather-data";
+import { useState } from "react";
 
 function Main({ children }: any) {
   return (
@@ -17,16 +18,16 @@ function Main({ children }: any) {
   );
 }
 
+if(typeof window !== "undefined") {
+  localStorage.setItem('weather-1', JSON.stringify({id:1}))
+}
+
 export default function Forecast() {
   // Used to detect live location
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const theme = useTheme(data?.weather[0].id);
-
-  useEffect(() => {
-    console.log("Rendered !");
-  });
 
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
@@ -77,12 +78,7 @@ export default function Forecast() {
           backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
         }}
       >
-        <CurrentWeather
-          main={data?.weather[0].main}
-          temperature={data?.main.temp}
-          description={data?.weather[0].description}
-          weatherIcon={faSun}
-        />
+        <CurrentWeather />
       </div>
     </Main>
   );

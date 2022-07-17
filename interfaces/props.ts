@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { WeatherData } from "./weather-data";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
@@ -29,5 +29,5 @@ export interface CurrentWeatherProps {
   main: string | undefined;
   description: string | undefined;
   temperature: number | undefined;
-  weatherIcon: IconProp;
+  weatherIcon: undefined; // TODO: ADD ICONS
 }

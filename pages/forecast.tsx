@@ -34,6 +34,10 @@ export default function Forecast() {
     useLocation();
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const theme = useTheme(data?.weather[0].id);
+  
+  useEffect(() => {
+    localStorage.setItem('app-name', 'Apple');
+  }, []);
 
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");

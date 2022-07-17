@@ -40,11 +40,11 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
 
   useEffect(() => {
     setCache(data);
-  })
+  });
 
   return {
     data: data ? data : getCache(),
     isWeatherLoading: !data && !error && !getCache(),
-    weatherError: typeof location === "undefined" || error,
+    weatherError: error,
   };
 }

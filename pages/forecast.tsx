@@ -59,9 +59,7 @@ export default function ForecastPage() {
             <p>Loading weather</p>
           </Main>
         )
-      }
-
-      if (weatherError) {
+      } else if (weatherError) {
         return (
           <Main>
             <p>Weather data error</p>

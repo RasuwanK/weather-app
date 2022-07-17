@@ -20,7 +20,7 @@ export default function ForecastPage() {
   // Used to detect live location
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
-  const { data, isWeatherLoading, weatherError } = useWeather(location);
+  const { data, weatherError } = useWeather(location);
   //const theme = useTheme(data?.weather[0].id);
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
@@ -53,18 +53,16 @@ export default function ForecastPage() {
         </Main>
       );
     } else {
-      if (isWeatherLoading) {
-        return (
-          <Main>
-            <p>Weather data loading</p>
-          </Main>
-        );
-      } else if(weatherError){
+      if (Object.keys(data).length <= 2) {
+        <Main>
+          <p>Error while getting data from the server</p>
+        </Main>;
+      } else if (weatherError) {
         return (
           <Main>
             <p>Weather data error</p>
           </Main>
-        )
+        );
       }
     }
   }
@@ -73,9 +71,11 @@ export default function ForecastPage() {
     <Main>
       <div
         id="forecast-page"
-        style={{
-          //backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
-        }}
+        style={
+          {
+            //backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+          }
+        }
       >
         <CurrentWeather
           main={data?.weather[0].main}

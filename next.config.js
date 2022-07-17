@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const securityHeaders = [
+/* const securityHeaders = [
   // DNS prefetching
   {
     key: "X-DNS-Prefetch-Control",
@@ -21,19 +21,19 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'geolocation=()'
   }
-];
+]; */
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: false,
-  async Headers() {
+/*   async Headers() {
     return [
       {
         source: "/:path*",
         headers: securityHeaders,
       },
     ];
-  },
+  }, */
 };
 
 module.exports = nextConfig;

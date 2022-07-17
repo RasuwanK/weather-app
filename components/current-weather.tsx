@@ -1,10 +1,12 @@
 import { CurrentWeatherProps } from "../interfaces/props";
 
 export function CurrentWeather() {
-  const container = localStorage.getItem("weather-data");
-  let data = null;
-  if (container !== "pending") {
-    data = JSON.parse(container!);
+  if(typeof window !== "undefined") {
+    const container = localStorage.getItem("weather-data");
+    let data = null;
+    if (container !== "pending") {
+      data = JSON.parse(container!);
+    }
   }
 
   return (

@@ -73,7 +73,6 @@ export default function ForecastPage() {
             }
           }
         >
-          {isWeatherLoading && "Loading weather data"}
           {weatherError && !isWeatherLoading && "Error in weather data"}
           <CurrentWeather
             main={data?.weather[0].main || cachedData?.weather[0].main}

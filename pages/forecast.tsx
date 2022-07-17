@@ -53,16 +53,20 @@ export default function ForecastPage() {
         </Main>
       );
     } else {
-      if (Object.keys(data).length <= 2) {
-        <Main>
-          <p>Error while getting data from the server</p>
-        </Main>;
-      } else if (weatherError) {
+      if (weatherError) {
         return (
           <Main>
             <p>Weather data error</p>
           </Main>
         );
+      } else {
+        if(Object.keys(data).length <= 2) {
+          return (
+            <Main>
+              <p>Error with the API</p>
+            </Main>
+          )
+        }
       }
     }
   }

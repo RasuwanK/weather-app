@@ -23,8 +23,6 @@ export default function Forecast() {
     useLocation();
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const theme = useTheme(data?.weather[0].id);
-  const { cache } = useSWRConfig();
-
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
     return <p>No geolocation functionality awailable in the browser</p>;
@@ -68,18 +66,18 @@ export default function Forecast() {
 
   return (
     <Main>
-        <div
-          id="forecast-page"
-          style={{
-            backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
-          }}
-        >
-          <CurrentWeather
-            main={data?.weather[0].main}
-            description={data?.weather[0].description}
-            temperature={data?.main.temp}
-          />
-        </div>
+      <div
+        id="forecast-page"
+        style={{
+          backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+        }}
+      >
+        <CurrentWeather
+          main={data?.weather[0].main || '532423'}
+          description={data?.weather[0].description || '2323'}
+          temperature={data?.main.temp}
+        />
+      </div>
     </Main>
   );
 }

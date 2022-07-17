@@ -52,7 +52,7 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
   setCache(data);
 
   return {
-    data: data || getCache(),
+    data,
     isWeatherLoading: !data && !error,
     weatherError: typeof location === "undefined" || error,
   };

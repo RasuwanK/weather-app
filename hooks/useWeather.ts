@@ -10,17 +10,17 @@ const fetcher = (url: string) =>
 const client = () => typeof window !== "undefined";
 
 function getCache(): WeatherData | undefined {
-  if(client()) {
-    if(localStorage.getItem('weather-data')) {
-      return JSON.parse(localStorage.getItem('weather-data')!);
+  if (client()) {
+    if (localStorage.getItem("weather-data")) {
+      return JSON.parse(localStorage.getItem("weather-data")!);
     }
   }
 }
 
 function setCache(data: WeatherData | undefined) {
-  if(client()) {
-    if(data) {
-      localStorage.setItem('weather-data', JSON.stringify(data));
+  if (client()) {
+    if (data) {
+      localStorage.setItem("weather-data", JSON.stringify(data));
     }
   }
 }
@@ -52,7 +52,7 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
   setCache(data);
 
   return {
-    data,
+    data: data ? data : getCache(),
     isWeatherLoading: !data && !error,
     weatherError: typeof location === "undefined" || error,
   };

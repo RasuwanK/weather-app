@@ -6,6 +6,7 @@ import { useLocation } from "../hooks/useLocation";
 import { useEffect, Fragment } from "react";
 import { WeatherData } from "../interfaces/weather-data";
 import { useState } from "react";
+import { SWRConfig } from "swr";
 
 function Main({ children }: any) {
   return (
@@ -18,8 +19,13 @@ function Main({ children }: any) {
   );
 }
 
-if(typeof window !== "undefined") {
-  localStorage.setItem('weather-1', JSON.stringify({id:1}))
+function localStorageProvider() {
+  const map = new Map(JSON.parse(localStorage.getItem("app-cache") || "[]"));
+  window.addEventListener("beforeunload", () => {
+    const appCache = JSON.stringify(Array.from(map.entries()));
+    localStorage.setItem("app-cache", appCache);
+  });
+  return map;
 }
 
 export default function Forecast() {
@@ -72,14 +78,20 @@ export default function Forecast() {
 
   return (
     <Main>
-      <div
-        id="forecast-page"
-        style={{
-          backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
-        }}
-      >
-        <CurrentWeather />
-      </div>
+      <SWRConfig value={{ provider: localStorageProvider }}>
+        <div
+          id="forecast-page"
+          style={{
+            backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
+          }}
+        >
+          <CurrentWeather
+            main={data?.weather[0].main}
+            description={data?.weather[0].description}
+            temperature={data?.main.temp}
+          />
+        </div>
+      </SWRConfig>
     </Main>
   );
 }

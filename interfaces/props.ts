@@ -29,5 +29,5 @@ export interface CurrentWeatherProps {
   main: string | undefined;
   description: string | undefined;
   temperature: number | undefined;
-  weatherIcon: undefined; // TODO: ADD ICONS
+  weatherIcon?: undefined; // TODO: ADD ICONS
 }

@@ -1,14 +1,15 @@
+import { useEffect, useState } from "react";
+import { useSWRConfig } from "swr";
 import { CurrentWeatherProps } from "../interfaces/props";
+import { WeatherData } from "../interfaces/weather-data";
 
-export function CurrentWeather() {
-  let data = null;
-  if (typeof window !== "undefined") {
-    const container = localStorage.getItem("weather-data");
-    if (container !== "pending") {
-      data = JSON.parse(container!);
-    }
-  }
-
+export function CurrentWeather({
+  main,
+  description,
+  temperature,
+  weatherIcon,
+}: CurrentWeatherProps) {
+  const {cache} = useSWRConfig();
   return (
     <article
       id="current-weather"
@@ -23,13 +24,13 @@ export function CurrentWeather() {
         className="grid grid-cols-1 grid-rows-3 items-center"
       >
         <div id="main" className="text-6xl">
-          {data.main}
+          {main}
         </div>
         <div id="description" className="text-3xl">
-          {data.description}
+          {description}
         </div>
         <div id="temperatue" className="text-2xl">
-          {data.temp}
+          {temperature}
         </div>
       </section>
     </article>

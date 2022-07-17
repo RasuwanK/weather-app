@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useSWR from "swr";
 import { WeatherData } from "../interfaces/weather-data";
 
@@ -28,20 +27,6 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     ),
     fetcher
   );
-
-  if (typeof window !== "undefined") {
-    if (typeof data !== "undefined") {
-      if (localStorage.getItem("weather-data")) {
-        if (
-          JSON.parse(localStorage.getItem("weather-data")!).id !==
-          data.weather[0].id
-        )
-          localStorage.setItem("weather-data", JSON.stringify(data.weather[0]));
-      } else {
-        localStorage.setItem("weather-data", "pending");
-      }
-    }
-  }
 
   return {
     data,

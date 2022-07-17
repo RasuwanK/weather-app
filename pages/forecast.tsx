@@ -72,6 +72,7 @@ export default function Forecast() {
           backgroundImage: `linear-gradient(${theme.bg.from}, ${theme.bg.to})`,
         }}
       >
+        <p>{!data && 'Data lost'}</p>
         <CurrentWeather
           main={data?.weather[0].main || '532423'}
           description={data?.weather[0].description || '2323'}

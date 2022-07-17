@@ -4,7 +4,6 @@ import { useTheme } from "../hooks/useTheme";
 import { CurrentWeather } from "../components/current-weather";
 import { useLocation } from "../hooks/useLocation";
 import { useEffect, Fragment } from "react";
-import { SWRConfig, useSWRConfig } from "swr";
 
 function Main({ children }: any) {
   return (
@@ -17,7 +16,7 @@ function Main({ children }: any) {
   );
 }
 
-export default function Forecast() {
+export default function ForecastPage() {
   // Used to detect live location
   const { location, isLocationLoading, locationError, noLocation } =
     useLocation();
@@ -73,8 +72,8 @@ export default function Forecast() {
         }}
       >
         <CurrentWeather
-          main={data?.weather[0].main || "532423"}
-          description={data?.weather[0].description || "2323"}
+          main={data?.weather[0].main}
+          description={data?.weather[0].description}
           temperature={data?.main.temp}
         />
       </div>

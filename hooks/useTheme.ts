@@ -3,6 +3,10 @@ const themes = {
     //mainIcon: { day: faXmarkCircle, night: faXmarkCircle },
     bg: { from: "#B8DA82", to: "#1ECCC7" },
     fg: "text-black",
+    tempTable: {
+      bg: 'black',
+      fg: 'white'
+    } 
   },
   clear: {
     //mainIcon: { day: regular("fa-cloud"), night: faMoon },

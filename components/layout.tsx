@@ -8,7 +8,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div>
       <Navbar />
-      <main id="main-content z-0">{children}</main>
+      <main id="main-content">{children}</main>
       <Footer />
     </div>
   );

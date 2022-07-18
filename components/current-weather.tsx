@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import { useSWRConfig } from "swr";
 import { CurrentWeatherProps } from "../interfaces/props";
-import { WeatherData } from "../interfaces/weather-data";
 
 export function CurrentWeather({
   main,
@@ -9,11 +6,10 @@ export function CurrentWeather({
   temperature,
   weatherIcon,
 }: CurrentWeatherProps) {
-  const {cache} = useSWRConfig();
   return (
     <article
       id="current-weather"
-      className="grid grid-cols-2 grid-rows-1 max-w-[500px] p-3 w-full drop-shadow-md font-open-sans"
+      className="grid grid-cols-2 grid-rows-1 max-w-[500px] p-10 ml-6 drop-shadow-md backdrop-blur-lg bg-[#cad5e39f] font-open-sans rounded-lg"
     >
       <section
         className="grid grid-cols-1 grid-rows-1 justify-items-center items-center"

@@ -7,7 +7,7 @@ export default function IndexPage() {
       <Head>
         <title>Weather App</title>
       </Head>
-      <div>
+      <div className="pt-44">
         <article>
           <p>Welcome the weather forecaster</p>
           <Link href="/forecast">

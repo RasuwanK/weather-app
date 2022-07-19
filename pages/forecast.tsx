@@ -8,6 +8,7 @@ import { useState } from "react";
 import { WeatherData } from "../interfaces/weather-data";
 import Image from "next/image";
 import icon from "../public/weather.svg";
+import bg from "../public/backgrounds/henry-co--qGKIX1Vxtk-unsplash.jpg";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -41,7 +42,7 @@ export default function ForecastPage() {
       </Head>
       <div className="pt-32">
         <article className="weather-dashboard h-[500px] grid grid-cols-dashboard-lg">
-          <section className="left bg-atmosphere-day bg-cover bg-no-repeat grid grid-cols-1 gap-3 content-center justify-items-center font-open-sans">
+          <section className="left bg-cover bg-cloudy-day bg-no-repeat grid grid-cols-1 gap-3 content-center justify-items-center font-open-sans">
             <div className="weather-icon">
               <Image alt="weather-icon" src={icon} />
             </div>

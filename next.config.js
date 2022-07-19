@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const securityHeaders = [
+/* const securityHeaders = [
   // DNS prefetching
   {
     key: "X-DNS-Prefetch-Control",
@@ -22,7 +22,7 @@ const securityHeaders = [
     value: "geolocation=()",
   },
 ];
-
+ */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,

@@ -29,7 +29,7 @@ export default function ForecastPage() {
   useEffect(() => {
     const cache = localStorage.getItem("weather-data");
     setCachedData(JSON.parse(cache!));
-  }, [data]);
+  }, []);
 
   // In case if geolocation is not awailable in the browser
   if (noLocation) {
@@ -43,8 +43,11 @@ export default function ForecastPage() {
         <title>{"Today's"} forecast</title>
       </Head>
       <div className="pt-32">
-        <article className="weather-dashboard grid grid-cols-dashboard-lg">
-          <section className="left bg-cover bg-cloudy-day bg-no-repeat grid grid-cols-1 gap-3 content-center justify-items-center font-open-sans">
+        <article className="weather-dashboard m-1 grid grid-cols-dashboard-lg">
+          <section
+            className={`left bg-cover bg-no-repeat rounded-md grid grid-cols-1 gap-3 content-center justify-items-center font-open-sans`}
+            style={{ backgroundImage: theme.bgLeft.day }}
+          >
             <div className="weather-icon">
               <Image alt="weather-icon" src={windIcon} />
             </div>
@@ -57,9 +60,12 @@ export default function ForecastPage() {
             </p>
           </section>
           <section className="right grid grid-cols-1 grid-rows-right-row gap-4 font-open-sans">
-            <nav className="tab-switcher grid grid-cols-1 items-center p-4 mx-2 rounded-md bg-[#CFE2EC]">
+            <nav
+              className="tab-switcher grid grid-cols-1 items-center p-4 mx-2 rounded-md"
+              style={{ backgroundColor: theme.bgRight.day }}
+            >
               <ul className="tab-list list-none grid grid-cols-5 gap-3 mx-4">
-                <li className="tab grid-rows-tab-layout items-center gap-3 p-4 bg-white border-white rounded-lg drop-shadow-sm hover:border-[#2E599A] hover:cursor-pointer border-4">
+                <li className="tab grid-rows-tab-layout items-center gap-3 p-4 bg-white border-white rounded-lg drop-shadow-sm hover:border-[#1c293b] hover:cursor-pointer border-4">
                   <div className="tab-icon grid justify-items-center">
                     <Image
                       alt="Thermometer"
@@ -124,9 +130,14 @@ export default function ForecastPage() {
                 </li>
               </ul>
             </nav>
-            <article className="tab-content bg-[#CFE2EC] mx-2 rounded-md p-4">
+            <article
+              className="tab-content text-white mx-2 rounded-md p-4"
+              style={{ backgroundColor: theme.bgRight.day }}
+            >
               <header className="tab-title">
-                <h2 className="tab-title-text text-2xl text-center">Temperature</h2>
+                <h2 className="tab-title-text text-2xl text-center">
+                  Temperature
+                </h2>
               </header>
             </article>
           </section>

@@ -1,6 +1,15 @@
 import { ReactNode } from "react";
 import { WeatherData } from "./weather-data";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+interface ThemeData {
+  bg: { day: string; night: string };
+  fg: { day: string; night: string };
+}
+
+interface Theme {
+  left: ThemeData;
+  right: ThemeData;
+}
 
 export interface LayoutProps {
   children: ReactNode;
@@ -30,4 +39,37 @@ export interface CurrentWeatherProps {
   description: string | undefined;
   temperature: number | undefined;
   weatherIcon?: undefined; // TODO: ADD ICONS
+}
+
+export interface DashboardProps {
+  theme: Theme;
+  data: WeatherData | undefined;
+  cachedData: WeatherData | undefined;
+}
+
+export interface DashboardLeftProps {
+  theme: Theme;
+  weatherMain: string;
+  weatherDescription: string;
+}
+
+export interface DashboardRightProps {
+  theme: Theme;
+}
+
+export interface TabProps {
+  icon: any;
+  children: ReactNode;
+}
+
+export interface TabListProps {
+  children: ReactNode;
+}
+
+export interface TabContentProps {
+  theme: Theme;
+}
+
+export interface TabSwitcherProps {
+  theme: Theme;
 }

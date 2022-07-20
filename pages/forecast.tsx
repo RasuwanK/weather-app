@@ -23,7 +23,7 @@ export default function ForecastPage() {
   const [cachedData, setCachedData] = useState<WeatherData>();
 
   // Theming system based on the current climate
-  const theme = useTheme(data?.weather[0].id || cachedData?.weather[0].id);
+  const theme = useTheme(210);
 
   // Each time the data changes this cached data is set
   useEffect(() => {
@@ -46,12 +46,12 @@ export default function ForecastPage() {
         <article className="weather-dashboard m-1 grid grid-cols-dashboard-lg">
           <section
             className={`left bg-cover bg-no-repeat rounded-md grid grid-cols-1 gap-3 content-center justify-items-center font-open-sans`}
-            style={{ backgroundImage: theme.bgLeft.day }}
+            style={{ backgroundImage: theme.left.bg.day}}
           >
             <div className="weather-icon">
               <Image alt="weather-icon" src={windIcon} />
             </div>
-            <p className="main text-4xl font-bold text-[#736C6C]">
+            <p className="main text-4xl font-bold" style={{color:theme.left.fg.day}}>
               {data?.weather[0].main || cachedData?.weather[0].main}
             </p>
             <p className="description font-bold text-lg text-[#736C6C]">
@@ -62,7 +62,7 @@ export default function ForecastPage() {
           <section className="right grid grid-cols-1 grid-rows-right-row gap-4 font-open-sans">
             <nav
               className="tab-switcher grid grid-cols-1 items-center p-4 mx-2 rounded-md"
-              style={{ backgroundColor: theme.bgRight.day }}
+              style={{ backgroundColor: theme.right.bg.day }}
             >
               <ul className="tab-list list-none grid grid-cols-5 gap-3 mx-4">
                 <li className="tab grid-rows-tab-layout items-center gap-3 p-4 bg-white border-white rounded-lg drop-shadow-sm hover:border-[#1c293b] hover:cursor-pointer border-4">
@@ -131,8 +131,11 @@ export default function ForecastPage() {
               </ul>
             </nav>
             <article
-              className="tab-content text-white mx-2 rounded-md p-4"
-              style={{ backgroundColor: theme.bgRight.day }}
+              className="tab-content mx-2 rounded-md p-4"
+              style={{
+                backgroundColor: theme.right.bg.day,
+                color: theme.right.fg.day,
+              }}
             >
               <header className="tab-title">
                 <h2 className="tab-title-text text-2xl text-center">

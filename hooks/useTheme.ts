@@ -43,7 +43,7 @@ const themes = {
           "url('https://images.unsplash.com/photo-1607481416366-c8daccb8f3e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2400&q=80')",
       },
       fg: {
-        day: "#E5EAF1",
+        day: "black",
         night: "#D5DEEB",
       },
     },

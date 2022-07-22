@@ -49,12 +49,16 @@ export interface DashboardProps {
 
 export interface DashboardLeftProps {
   theme: Theme;
-  weatherMain: string;
-  weatherDescription: string;
+  weatherMain: string | undefined;
+  weatherDescription: string | undefined;
 }
 
 export interface DashboardRightProps {
   theme: Theme;
+}
+
+export interface DashboardTopProps {
+  children: ReactNode;
 }
 
 export interface TabProps {

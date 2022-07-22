@@ -44,6 +44,8 @@ export function useWeather(location: GeolocationCoordinates | undefined) {
     }
   });
 
+  console.log(data, error);
+
   return {
     data: data,
     isWeatherLoading: !data && !error,

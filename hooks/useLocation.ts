@@ -11,6 +11,8 @@ export function useLocation() {
     useState<GeolocationPositionError>();
   const [noLocation, setNoLocation] = useState<boolean>(false);
 
+  console.log(location);
+
   useEffect(() => {
     if (typeof navigator !== "undefined") {
       if ("geolocation" in navigator) {
@@ -24,7 +26,7 @@ export function useLocation() {
             setLocationLoading(false);
             setLocationError(error);
           },
-          { timeout: minute * 5, enableHighAccuracy: true, maximumAge: 0 }
+          { timeout: Infinity, enableHighAccuracy: true, maximumAge: 0 }
         );
       } else {
         setLocationLoading(false);

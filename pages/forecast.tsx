@@ -38,6 +38,8 @@ export default function ForecastPage() {
         <title>{"Today's"} forecast</title>
       </Head>
       <div className="pt-32">
+        {isLocationLoading && 'Loading location'}
+        {isWeatherLoading && 'Loading weather'}
         <WeatherDashboard theme={theme} data={data} cachedData={cachedData} />
       </div>
     </Fragment>

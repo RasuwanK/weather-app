@@ -20,6 +20,9 @@ export default function ForecastPage() {
   // Theming system based on the current climate
   const theme = useTheme(data?.weather[0].id || cachedData?.weather[0].id);
 
+  // Only for testing purpouses
+  // const theme = useTheme(500);
+
   // Each time the data changes this cached data is set
   useEffect(() => {
     const cache = localStorage.getItem("weather-data");
@@ -35,7 +38,7 @@ export default function ForecastPage() {
   return (
     <Fragment>
       <Head>
-        <title>{"Today's"} forecast</title>
+        <title>{"Today's forecast"}</title>
       </Head>
       <div className="pt-32">
         {isLocationLoading && 'Loading location'}

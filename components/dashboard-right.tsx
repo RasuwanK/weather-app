@@ -15,7 +15,7 @@ import { GeoTab } from "./tabs/geo-tab";
 import { SkyTab } from "./tabs/sky-tab";
 import { PressureTab } from "./tabs/pressure-tab";
 
-export function DashboardRight({ theme }: DashboardRightProps) {
+export function DashboardRight({ theme, data }: DashboardRightProps) {
   const [currentTab, setCurrentTab] = useState<Tabs>(Tabs.temperature);
 
   return (
@@ -70,7 +70,18 @@ export function DashboardRight({ theme }: DashboardRightProps) {
       <TabContent
         theme={theme}
         // This order should be matched with the order of the enum
-        tabs={[<TempTab key={Tabs.temperature} />, <WindTab key={Tabs.wind} />, <PressureTab key={Tabs.pressure} />, <SkyTab key={Tabs.sky} />, <GeoTab />]}
+        tabs={[
+          <TempTab
+            temp={data?.main.temp}
+            tempMax={data?.main.temp_max}
+            tempMin={data?.main.temp_min}
+            key={Tabs.temperature}
+          />,
+          <WindTab key={Tabs.wind} />,
+          <PressureTab key={Tabs.pressure} />,
+          <SkyTab key={Tabs.sky} />,
+          <GeoTab key={Tabs.geography} />,
+        ]}
         currentTab={currentTab}
       />
     </section>

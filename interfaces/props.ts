@@ -56,6 +56,7 @@ export interface DashboardLeftProps {
 
 export interface DashboardRightProps {
   theme: Theme;
+  data: WeatherData | undefined;
 }
 
 export interface DashboardTopProps {
@@ -65,7 +66,7 @@ export interface DashboardTopProps {
 export interface TabProps {
   icon: any;
   children: ReactNode;
-  onClick: MouseEventHandler<HTMLDivElement>;
+  onClick: MouseEventHandler<HTMLLIElement>;
 }
 
 export interface TabListProps {
@@ -80,4 +81,10 @@ export interface TabContentProps {
 
 export interface TabSwitcherProps {
   theme: Theme;
+}
+
+export interface TempTab {
+  temp: number | undefined;
+  tempMin: number | undefined;
+  tempMax: number | undefined;
 }

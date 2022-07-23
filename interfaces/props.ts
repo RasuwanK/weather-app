@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
+import { Tabs } from "../enums/tabs";
 import { WeatherData } from "./weather-data";
 
 interface ThemeData {
@@ -64,6 +65,7 @@ export interface DashboardTopProps {
 export interface TabProps {
   icon: any;
   children: ReactNode;
+  onClick: MouseEventHandler<HTMLDivElement>;
 }
 
 export interface TabListProps {
@@ -72,6 +74,8 @@ export interface TabListProps {
 
 export interface TabContentProps {
   theme: Theme;
+  tabs: ReactNode[];
+  currentTab: Tabs;
 }
 
 export interface TabSwitcherProps {

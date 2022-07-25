@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-export function PressureTab({ main }) {
+export function PressureTab({ main }:any) {
   return (
     <Fragment>
       {!main?.sea_level || !main?.grnd_level ? (

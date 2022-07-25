@@ -4,7 +4,7 @@ import { Fragment } from "react";
 export function TabContent({ theme, tabs, currentTab }: TabContentProps) {
   return (
     <article
-      className="tab-content mx-2 rounded-md p-4 grid grid-cols-1"
+      className="tab-content xl:mx-2 xl:rounded-md p-4 grid grid-cols-1"
       style={{
         backgroundColor: theme.right.bg.day,
         color: theme.right.fg.day,

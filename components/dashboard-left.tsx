@@ -9,7 +9,7 @@ export function DashboardLeft({
 }: DashboardLeftProps) {
   return (
     <section
-      className={`left bg-cover bg-no-repeat rounded-md grid grid-cols-1 gap-3 content-center justify-items-center font-open-sans`}
+      className={`left bg-cover bg-no-repeat xl:rounded-md w-full h-[300px] xl:h-[600px] grid xl:grid-cols-1 xl:gap-3 xl:ml-1 content-center justify-items-center font-open-sans`}
       style={{ backgroundImage: theme.left.bg.day }}
     >
       <div className="weather-icon">

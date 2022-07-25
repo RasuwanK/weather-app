@@ -31,6 +31,16 @@ type Cloud = {
   all: number;
 };
 
+type Rain = {
+  "1h": number;
+  "3h": number;
+}
+
+type Snow = {
+  "1h": number;
+  "3h": number;
+}
+
 type Sys = {
   type: number;
   id: number;
@@ -48,6 +58,8 @@ export interface WeatherData {
   visibility: number;
   wind: Wind;
   clouds: Cloud;
+  rain: Rain;
+  snow: Snow;
   dt: number;
   sys: Sys;
   timezone: number;

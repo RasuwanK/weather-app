@@ -19,9 +19,9 @@ export function DashboardRight({ theme, data }: DashboardRightProps) {
   const [currentTab, setCurrentTab] = useState<Tabs>(Tabs.temperature);
 
   return (
-    <section className="right grid grid-cols-1 grid-rows-right-row gap-4 font-open-sans">
+    <section className="right grid grid-cols-1 grid-rows-right-row xl:gap-4 font-open-sans">
       <nav
-        className="tab-switcher grid grid-cols-1 items-center p-4 mx-2 rounded-md"
+        className="tab-switcher grid grid-cols-1 items-center p-4 xl:mx-2 xl:rounded-md"
         style={{ backgroundColor: theme.right.bg.day }}
       >
         <TabList>
@@ -77,9 +77,20 @@ export function DashboardRight({ theme, data }: DashboardRightProps) {
             tempMin={data?.main.temp_min}
             key={Tabs.temperature}
           />,
-          <WindTab key={Tabs.wind} />,
-          <PressureTab key={Tabs.pressure} />,
-          <SkyTab key={Tabs.sky} />,
+          <WindTab
+            windSpeed={data?.wind.speed}
+            windDeg={data?.wind.deg}
+            windGust={data?.wind.gust}
+            key={Tabs.wind}
+          />,
+          <PressureTab main={data?.main} key={Tabs.pressure} />,
+          <SkyTab
+            rain={data?.rain}
+            snow={data?.snow}
+            humidity={data?.main.humidity}
+            coludness={data?.clouds}
+            key={Tabs.sky}
+          />,
           <GeoTab key={Tabs.geography} />,
         ]}
         currentTab={currentTab}

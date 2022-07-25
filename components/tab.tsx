@@ -1,10 +1,13 @@
 import Image from "next/image";
 import { TabProps } from "../interfaces/props";
 
-export function Tab({icon, children, onClick}:TabProps) {
+export function Tab({ icon, children, onClick }: TabProps) {
   return (
-    <li className="tab grid-rows-tab-layout w-full items-center gap-3 bg-white border-white rounded-lg drop-shadow-sm hover:border-[#1c293b] hover:cursor-pointer border-4 p-4" onClick={onClick}>
-      <div className="w-full select-none tab-icon grid justify-items-center" >
+    <li
+      className="tab mx-3 p-4 bg-white border-white rounded-lg drop-shadow-sm hover:border-[#1c293b] hover:cursor-pointer border-4"
+      onClick={onClick}
+    >
+      <div className="select-none tab-icon grid justify-items-center">
         <Image
           alt="Thermometer"
           src={icon}
@@ -13,7 +16,7 @@ export function Tab({icon, children, onClick}:TabProps) {
           layout="fixed"
         />
       </div>
-      <div className="tab-name min-w-full text-sm text-center select-none">{children}</div>
+      <div className="tab-name text-sm text-center select-none">{children}</div>
     </li>
   );
 }

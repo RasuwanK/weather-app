@@ -2,7 +2,7 @@ import { TempTab } from "../../interfaces/props";
 
 export function TempTab({ temp, tempMin, tempMax }: TempTab) {
   return (
-    <div className="temp-tab grid gap-4 grid-cols-ratio-2-1-1">
+    <div className="temp-tab grid gap-4 grid-rows-ratio-2-1-1 lg:grid-rows-1 lg:grid-cols-ratio-2-1-1">
       <div className="current-temp grid grid-cols-1 rounded-md items-center justify-items-center bg-white/[0.12]">
         <div className="grid grid-cols-1">
           <p className="text-center">Current temperature</p>

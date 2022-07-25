@@ -1,4 +1,4 @@
-export function SkyTab({ rain, snow, humidity, coludness }) {
+export function SkyTab({ rain, snow, humidity, coludness }:any) {
   return (
     <div className="sky-tab grid grid-cols-3 gap-4">
       <div className="bg-white/[0.12] grid grid-cols-1 rounded-md items-center justify-items-center">

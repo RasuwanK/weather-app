@@ -5,7 +5,6 @@ import { useLocation } from "../hooks/useLocation";
 import { Fragment, useEffect } from "react";
 import { useState } from "react";
 import { WeatherData } from "../interfaces/weather-data";
-import { WeatherDashboard } from "../components/weather-dashboard";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -41,9 +40,8 @@ export default function ForecastPage() {
         <title>{"Today's forecast"}</title>
       </Head>
       <div className="pt-32">
-        {isLocationLoading && 'Loading location'}
-        {isWeatherLoading && 'Loading weather'}
-        <WeatherDashboard theme={theme} data={data} cachedData={cachedData} />
+        {isLocationLoading && "Loading location"}
+        {isWeatherLoading && "Loading weather"}
       </div>
     </Fragment>
   );

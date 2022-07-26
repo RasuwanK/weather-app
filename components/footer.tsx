@@ -1,3 +1,5 @@
-export default function Footer() {
-  return <footer id="footer"></footer>;
+export function Footer() {
+    return (
+        <div></div>
+    )
 }

@@ -1,7 +1,5 @@
-import { ReactNode, useEffect } from "react";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
-import { Time } from "../interfaces/hooks";
+import { Navbar } from "./navbar";
+import { Footer } from "./footer";
 import { LayoutProps } from "../interfaces/props";
 
 export default function Layout({ children }: LayoutProps) {

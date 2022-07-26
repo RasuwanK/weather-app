@@ -20,7 +20,8 @@ module.exports = {
       gridTemplateRows: {
         "tab-layout": "2fr 1fr",
         "right-row": "1fr 2fr",
-        "ratio-2-1-1": "250px 120px 120px"
+        "ratio-2-1-1": "250px 120px 120px",
+        "ratio-1-2": "1fr 2fr"
       },
     },
   },

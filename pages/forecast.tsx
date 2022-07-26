@@ -1,10 +1,6 @@
 import Head from "next/head";
 import { useWeather } from "../hooks/useWeather";
-import { useTheme } from "../hooks/useTheme";
 import { useLocation } from "../hooks/useLocation";
-import { Fragment, useEffect } from "react";
-import { useState } from "react";
-import { WeatherData } from "../interfaces/weather-data";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -12,21 +8,12 @@ export default function ForecastPage() {
     useLocation();
   // To obtain current weather status
   const { data, isWeatherLoading, weatherError } = useWeather(location);
+  let cachedData;
 
   // Cached data values
-  const [cachedData, setCachedData] = useState<WeatherData>();
-
-  // Theming system based on the current climate
-  const theme = useTheme(data?.weather[0].id || cachedData?.weather[0].id);
-
-  // Only for testing purpouses
-  // const theme = useTheme(500);
-
-  // Each time the data changes this cached data is set
-  useEffect(() => {
-    const cache = localStorage.getItem("weather-data");
-    setCachedData(JSON.parse(cache!));
-  }, []);
+  if (typeof window !== "undefined") {
+    cachedData = JSON.parse(localStorage.getItem("weather-data") || "[]");
+  }
 
   // In case if geolocation is not awailable in the browser
   if (noLocation) {
@@ -35,14 +22,20 @@ export default function ForecastPage() {
   }
 
   return (
-    <Fragment>
+    <div className="page bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
       <Head>
         <title>{"Today's forecast"}</title>
       </Head>
-      <div className="pt-32">
+      <div>
         {isLocationLoading && "Loading location"}
         {isWeatherLoading && "Loading weather"}
       </div>
-    </Fragment>
+      <header className="header grid grid-cols-2">
+        <p className="justify-self-left p-2 text-black/[0.65] text-[21px] font-semibold">
+          {"Today's weather"}
+        </p>
+        <p className="justify-self-end p-2">Colombo</p>
+      </header>
+    </div>
   );
 }

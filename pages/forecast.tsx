@@ -10,6 +10,7 @@ import meterIcon from '../public/weather-icons/meter.svg';
 import locationIcon from '../public/weather-icons/location.svg';
 import { WeatherData } from "../interfaces/weather-data";
 import { Fragment, useEffect, useState } from "react";
+import { getDirection } from "../lib/directions";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -106,7 +107,7 @@ export default function ForecastPage() {
                       width="100"
                     />
                   </aside>
-                  <section className="grid justify-items-center">
+                  <section className="grid">
                     <p className="text-[45px] font-bold">
                       {data?.main.temp || cachedData?.main.temp} C<sup>0</sup>
                     </p>
@@ -144,9 +145,10 @@ export default function ForecastPage() {
                   </p>
                   <article className="grid grid-cols-ratio-1-2 items-center">
                     <Image
-                      alt="An image of water droplets"
+                      alt="An image of a water droplet"
                       width="90"
                       height="100"
+                      priority={true}
                       src={Images["04d"]}
                     />
                     <p className="text-center text-[30px] justify-self-center">
@@ -170,17 +172,17 @@ export default function ForecastPage() {
                       width="100"
                     />
                   </aside>
-                  <section className="grid justify-items-center">
-                    <p className="text-[45px] font-bold">
+                  <section className="grid">
+                    <p className="text-[45px] font-bold justify-center">
                       {data?.wind.speed || cachedData?.wind.speed} ms<sup>-1</sup>
                     </p>
-                    <section className="grid grid-cols-2 gap-3">
+                    <section className="grid grid-cols-ratio-1-2 gap-3">
                       <p>Direction</p>
-                      <p>{data?.wind.deg || cachedData?.wind.deg}</p>
+                      <p>{getDirection(data?.wind.deg || cachedData?.wind.deg || 0)}</p>
                     </section>
                     <section className="grid grid-cols-2 gap-3">
-                      <p>Min</p>
-                      <p>{data?.main.temp_min || cachedData?.main.temp_min}</p>
+                      <p>Gust</p>
+                      <p>{data?.main.temp_min || cachedData?.main.temp_min} ms<sup>-1</sup></p>
                     </section>
                   </section>
                 </section>

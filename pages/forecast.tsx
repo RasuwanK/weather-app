@@ -39,7 +39,7 @@ export default function ForecastPage() {
           <p className="justify-self-start p-2 text-black/[0.65] text-[21px] font-semibold">
             {"Today's weather"}
           </p>
-          <div className="justify-self-end grid grid-cols-ratio-1-2 items-center">
+          <div className="justify-self-end grid grid-cols-ratio-1-2 items-center p-3">
             <Image alt="Location icon" src={locationIcon} layout="fixed" width="40" height="40" />
             <p>{data?.sys.country || cachedData?.sys.country}, {data?.name}</p>
           </div>
@@ -48,16 +48,16 @@ export default function ForecastPage() {
           <section className="icon">
             <Image
               alt="Weather Icon"
-              width="120"
-              height="120"
+              width="150"
+              height="150"
               src={Images[data?.weather[0].icon || "01d"]}
             />
           </section>
           <section className="content">
-            <h1 className="font-bold text-[36px]">
+            <h1 className="font-bold text-[40px]">
               {data?.weather[0].main || cachedData?.weather[0].main}
             </h1>
-            <p className="font-semibold text-[16px]">
+            <p className="font-semibold text-[20px]">
               {data?.weather[0].description ||
                 cachedData?.weather[0].description}
             </p>
@@ -66,7 +66,7 @@ export default function ForecastPage() {
         <div className="weather-data-cards mt-[200px] grid justify-items-center">
           <div className="flex flex-col w-[90%] lg:w-[80%]">
             {Object.hasOwn(data || cachedData || {}, "rain") && (
-              <article className="rain-data-card grid grid-cols-3 gap-3 items-center justify-center p-4 bg-[#9AC3A8] rounded-[13px] h-[200px]">
+              <article className="rain-data-card drop-shadow-md grid grid-cols-3 gap-3 items-center justify-center p-4 bg-[#9AC3A8] rounded-[13px] h-[200px]">
                 <section className="grid justify-items-center p-4">
                   <p className="text-[36px] font-bold">Rain</p>
                   <Image
@@ -93,7 +93,7 @@ export default function ForecastPage() {
               </article>
             )}
             <div className="split-container grid grid-cols-2 h-[380px] gap-4">
-              <article className="temperature-card grid grid-cols-1 items-center bg-[#D8DBB1] rounded-[13px] p-3">
+              <article className="temperature-card drop-shadow-md grid grid-cols-1 items-center bg-[#D8DBB1] rounded-[13px] p-3">
                 <section className="grid grid-cols-1 justify-items-center">
                   <p className="text-[20px] font-bold">Temperature</p>
                 </section>
@@ -122,7 +122,7 @@ export default function ForecastPage() {
                 </section>
               </article>
               <div className="grid grid-cols-1 grid-rows-2 gap-3">
-                <article className="humidity-card grid grid-cols-1 justify-items-stretch p-4 rounded-[13px] bg-[#A6D6D9]">
+                <article className="humidity-card drop-shadow-md grid grid-cols-1 justify-items-stretch p-4 rounded-[13px] bg-[#A6D6D9]">
                   <p className="text-[20px] font-bold justify-self-center text-center">
                     Humidity
                   </p>
@@ -138,7 +138,7 @@ export default function ForecastPage() {
                     </p>
                   </article>
                 </article>
-                <article className="cloudness-card grid grid-cols-1 justify-items-stretch p-4 rounded-[13px] bg-[#A6D6D9]">
+                <article className="cloudness-card drop-shadow-md grid grid-cols-1 justify-items-stretch p-4 rounded-[13px] bg-[#A6D6D9]">
                   <p className="text-[20px] font-bold justify-self-center text-center">
                     Cloudness
                   </p>
@@ -157,7 +157,7 @@ export default function ForecastPage() {
               </div>
             </div>
             <div className="split-container mt-[50px] grid grid-cols-2 grid-row-1 h-[380px] gap-4">
-              <article className="temperature-card grid grid-cols-1 items-center bg-[#C7C0E3] rounded-[13px] p-3">
+              <article className="temperature-card drop-shadow-md grid grid-cols-1 items-center bg-[#C7C0E3] rounded-[13px] p-3">
                 <section className="grid grid-cols-1 justify-items-center">
                   <p className="text-[20px] font-bold">Wind</p>
                 </section>
@@ -185,7 +185,7 @@ export default function ForecastPage() {
                   </section>
                 </section>
               </article>
-              <article className="temperature-card grid grid-cols-1 items-center bg-[#E2B2AF] rounded-[13px] p-3">
+              <article className="temperature-card drop-shadow-md grid grid-cols-1 items-center bg-[#E2B2AF] rounded-[13px] p-3">
                 <section className="grid grid-cols-1 justify-items-center">
                   <p className="text-[20px] font-bold">Pressure</p>
                 </section>

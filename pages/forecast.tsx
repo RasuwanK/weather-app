@@ -7,6 +7,7 @@ import humidIcon from "../public/weather-icons/water-drop.svg";
 import rainIcon from "../public/weather-icons/rain.svg";
 import thermoIcon from "../public/weather-icons/thermometer.svg";
 import meterIcon from '../public/weather-icons/meter.svg';
+import locationIcon from '../public/weather-icons/location.svg';
 import { WeatherData } from "../interfaces/weather-data";
 import { Fragment, useEffect, useState } from "react";
 
@@ -38,7 +39,10 @@ export default function ForecastPage() {
           <p className="justify-self-start p-2 text-black/[0.65] text-[21px] font-semibold">
             {"Today's weather"}
           </p>
-          <p className="justify-self-end p-2">Colombo</p>
+          <div className="justify-self-end grid grid-cols-ratio-1-2 items-center">
+            <Image alt="Location icon" src={locationIcon} layout="fixed" width="40" height="40" />
+            <p>{data?.sys.country || cachedData?.sys.country}, {data?.name}</p>
+          </div>
         </header>
         <article className="main-details w-[400px] mt-11 grid grid-cols-2 justify-items-center">
           <section className="icon">
@@ -183,7 +187,7 @@ export default function ForecastPage() {
               </article>
               <article className="temperature-card grid grid-cols-1 items-center bg-[#E2B2AF] rounded-[13px] p-3">
                 <section className="grid grid-cols-1 justify-items-center">
-                  <p className="text-[20px] font-bold">Wind</p>
+                  <p className="text-[20px] font-bold">Pressure</p>
                 </section>
                 <section className="grid grid-cols-ratio-1-2 justify-items-center">
                   <aside>

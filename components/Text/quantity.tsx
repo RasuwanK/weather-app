@@ -21,7 +21,14 @@ export function Quantity({ type, children }: QuantityProps) {
   } else if (type == "precent") {
     return <Fragment>{children} %</Fragment>;
   } else if (type == "pressure") {
-    return <Fragment>{children} hPa</Fragment>
+    return <Fragment>{children} hPa</Fragment>;
+  } else if (type == "angle") {
+    return (
+      <Fragment>
+        {children}
+        <sup>0</sup>
+      </Fragment>
+    );
   } else {
     return <Fragment>{children}</Fragment>;
   }

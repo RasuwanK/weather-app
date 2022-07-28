@@ -1,41 +1,45 @@
-export function getDirection(direction: number | undefined) {
-  if (typeof direction == "undefined") {
-    return "N/A";
-  } else {
+export function getDirection(direction: number | undefined): {
+  dir: number | string;
+  from: string | "";
+  to: string | "";
+} {
+  if (typeof direction !== "undefined") {
     if (direction == 0 || direction == 360) {
-      return "North";
+      return { dir: "North", from: "", to: "" };
     } else if (direction > 0 && direction < 45) {
-      return `${direction} from North`;
+      return { dir: direction, from: "North", to: "East" };
     } else if (direction == 45) {
-      return "North East";
+      return { dir: "North East", from: "", to: "" };
     } else if (direction > 45 && direction < 90) {
-      return `${direction} from North towards East`;
+      return { dir: direction, from: "North", to: "East" };
     } else if (direction == 90) {
-      return "East";
+      return { dir: "East", from: "", to: "" };
     } else if (direction > 90 && direction < 135) {
-      return `${direction - 90} from East towards South`;
+      return { dir: direction - 90, from: "East", to: "South" };
     } else if (direction == 135) {
-      return `South East`;
+      return { dir: "South East", from: "", to: "" };
     } else if (direction > 135 && direction < 180) {
-      return `${direction - 90} from East towards South`;
+      return { dir: direction - 90, from: "East", to: "South" };
     } else if (direction == 180) {
-      return `South`;
+      return { dir: "South", from: "", to: "" };
     } else if (direction > 180 && direction < 225) {
-      return `${direction - 180} from South towards West`;
+      return { dir: direction - 180, from: "South", to: "West" };
     } else if (direction == 225) {
-      return `South West`;
+      return { dir: "South West", from: "", to: "" };
     } else if (direction > 225 && direction < 270) {
-      return `${direction - 180} from South towards West`;
+      return { dir: direction - 180, from: "South", to: "West" };
     } else if (direction == 270) {
-      return `West`;
+      return { dir: "West", from: "", to: "" };
     } else if (direction > 270 && direction < 315) {
-      return `${direction - 270} from West towards North`;
+      return { dir: direction - 270, from: "West", to: "North" };
     } else if (direction == 315) {
-      return `North West`;
+      return { dir: "North West", from: "", to: "" };
     } else if (direction > 315 && direction < 360) {
-      return `${direction - 270} from West towards North`;
+      return { dir: direction - 270, from: "West", to: "North" };
     } else {
-      return `Invalid value`;
+      return { dir: 0, from: "", to: "" };
     }
+  } else {
+    return { dir: 0, from: "", to: "" };
   }
 }

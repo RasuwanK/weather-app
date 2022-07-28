@@ -14,6 +14,7 @@ import { WeatherLabel } from "../components/WeatherLabel/weather-label";
 import { ColumnHell } from "../components/Grid/column-hell";
 import { HeadingBar } from "../components/HeadingBar/heading-bar";
 import { MainDetails } from "../components/MainDetails/main-details";
+import { Quantity } from "../components/Text/quantity";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -22,6 +23,7 @@ export default function ForecastPage() {
   // To obtain current weather status
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const [cachedData, setCachedData] = useState<WeatherData>();
+  const wind = getDirection(data?.wind.deg || cachedData?.wind.deg);
 
   useEffect(() => {
     setCachedData(JSON.parse(localStorage.getItem("weather-data") || "[]"));
@@ -94,9 +96,9 @@ export default function ForecastPage() {
                 mainData={data?.wind.speed}
                 unit="speed"
                 alt="An image of a tornado"
-                sideDescription={`Wind blows from ${getDirection(
-                  data?.wind.deg || cachedData?.wind.deg
-                )}`}
+                sideDescription={<Fragment>
+                  Wind blows <Quantity type="angle">{wind.dir}</Quantity> from {wind.from} towards {wind.to} 
+                </Fragment>}
                 color="#C7C0E3"
                 belowData={[
                   {

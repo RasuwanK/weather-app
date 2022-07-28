@@ -2,6 +2,7 @@ import Image from "next/image";
 import { BoldText } from "../Text/bold-text";
 import { BoldMediumText } from "../Text/bold-medium-text";
 import { Quantity } from "../Text/quantity";
+import { ReactNode } from "react";
 
 interface WeatherArticleProps {
   title: String;
@@ -10,7 +11,7 @@ interface WeatherArticleProps {
   belowData: { key: string | number; value: string | number | undefined }[];
   color: string;
   unit: string;
-  sideDescription?: string;
+  sideDescription?: ReactNode;
   alt: string;
 }
 

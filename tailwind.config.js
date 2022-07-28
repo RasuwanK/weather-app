@@ -22,7 +22,8 @@ module.exports = {
         "right-row": "1fr 2fr",
         "ratio-2-1-1": "250px 120px 120px",
         "ratio-1-2": "1fr 2fr",
-        "ratio-1-3":"1fr 3fr"
+        "ratio-1-3":"1fr 3fr",
+        "ratio-1-5":"1fr 5fr"
       },
       screens: {
         "sx":"370px"

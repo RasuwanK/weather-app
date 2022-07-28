@@ -7,7 +7,7 @@ interface BoldMediumTextProps {
 
 export function BoldMediumText({ children, isCenter }: BoldMediumTextProps) {
   return (
-    <p className={`font-bold text-[45px] ${isCenter ? "text-center" : ""}`}>
+    <p className={`font-bold text-[30px] sx:text-[45px] ${isCenter ? "text-center" : ""}`}>
       {children}
     </p>
   );

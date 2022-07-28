@@ -1,16 +1,19 @@
 import Head from "next/head";
 import { useWeather } from "../hooks/useWeather";
 import { useLocation } from "../hooks/useLocation";
-import Image from "next/image";
 import Images from "../lib/weather-icons";
 import humidIcon from "../public/weather-icons/water-drop.svg";
 import rainIcon from "../public/weather-icons/rain.svg";
 import thermoIcon from "../public/weather-icons/thermometer.svg";
-import meterIcon from '../public/weather-icons/meter.svg';
-import locationIcon from '../public/weather-icons/location.svg';
+import meterIcon from "../public/weather-icons/meter.svg";
 import { WeatherData } from "../interfaces/weather-data";
 import { Fragment, useEffect, useState } from "react";
 import { getDirection } from "../lib/directions";
+import { WeatherArticle } from "../components/WeatherArticle/weather-article";
+import { WeatherLabel } from "../components/WeatherLabel/weather-label";
+import { ColumnHell } from "../components/Grid/column-hell";
+import { HeadingBar } from "../components/HeadingBar/heading-bar";
+import { MainDetails } from "../components/MainDetails/main-details";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -35,190 +38,95 @@ export default function ForecastPage() {
       <Head>
         <title>{"Today's forecast"}</title>
       </Head>
-      <div className="site-content bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
-        <header className="header grid grid-cols-2">
-          <p className="justify-self-start p-2 text-black/[0.65] text-[21px] font-semibold">
-            {"Today's weather"}
-          </p>
-          <div className="justify-self-end grid grid-cols-ratio-1-2 items-center p-3">
-            <Image alt="Location icon" src={locationIcon} layout="fixed" width="40" height="40" />
-            <p>{data?.sys.country || cachedData?.sys.country}, {data?.name}</p>
-          </div>
-        </header>
-        <article className="main-details w-[400px] mt-11 grid grid-cols-2 justify-items-center">
-          <section className="icon">
-            <Image
-              alt="Weather Icon"
-              width="150"
-              height="150"
-              src={Images[data?.weather[0].icon || "01d"]}
-            />
-          </section>
-          <section className="content">
-            <h1 className="font-bold text-[40px]">
-              {data?.weather[0].main || cachedData?.weather[0].main}
-            </h1>
-            <p className="font-semibold text-[20px]">
-              {data?.weather[0].description ||
-                cachedData?.weather[0].description}
-            </p>
-          </section>
-        </article>
-        <div className="weather-data-cards mt-[200px] grid justify-items-center">
-          <div className="flex flex-col w-[90%] lg:w-[80%]">
-            {Object.hasOwn(data || cachedData || {}, "rain") && (
-              <article className="rain-data-card drop-shadow-md grid grid-cols-3 gap-3 items-center justify-center p-4 bg-[#9AC3A8] rounded-[13px] h-[200px]">
-                <section className="grid justify-items-center p-4">
-                  <p className="text-[36px] font-bold">Rain</p>
-                  <Image
-                    src={rainIcon}
-                    alt="Cloud with raining"
-                    width="100"
-                    height="100"
-                  />
-                </section>
-                <section className="grid justify-items-center p-4 bg-white/[0.26] rounded-[13px] h-[90%]">
-                  <p className="text-[16px] font-bold">Last 1h</p>
-                  <p className="text-[29px]">
-                    {data?.rain["1h"] || cachedData?.rain["1h"]}
-                  </p>
-                </section>
-                <section className="grid justify-items-center p-4 bg-white/[0.26] rounded-[13px] h-[90%]">
-                  <p className="text-[16px] font-bold">Last 3h</p>
-                  <p className="text-[29px]">
-                    {data?.rain["3h"] ||
-                      cachedData?.rain["3h"] ||
-                      "No rainfall"}
-                  </p>
-                </section>
-              </article>
-            )}
-            <div className="split-container grid grid-cols-2 h-[380px] gap-4">
-              <article className="temperature-card drop-shadow-md grid grid-cols-1 items-center bg-[#D8DBB1] rounded-[13px] p-3">
-                <section className="grid grid-cols-1 justify-items-center">
-                  <p className="text-[20px] font-bold">Temperature</p>
-                </section>
-                <section className="grid grid-cols-ratio-1-2 justify-items-center">
-                  <aside>
-                    <Image
-                      src={thermoIcon}
-                      alt="Image of an thermometer"
-                      height="150"
-                      width="100"
-                    />
-                  </aside>
-                  <section className="grid">
-                    <p className="text-[45px] font-bold">
-                      {data?.main.temp || cachedData?.main.temp} C<sup>0</sup>
-                    </p>
-                    <section className="grid grid-cols-2 gap-3">
-                      <p>Max</p>
-                      <p>{data?.main.temp_max || cachedData?.main.temp_max}</p>
-                    </section>
-                    <section className="grid grid-cols-2 gap-3">
-                      <p>Min</p>
-                      <p>{data?.main.temp_min || cachedData?.main.temp_min}</p>
-                    </section>
-                  </section>
-                </section>
-              </article>
-              <div className="grid grid-cols-1 grid-rows-2 gap-3">
-                <article className="humidity-card drop-shadow-md grid grid-cols-1 justify-items-stretch p-4 rounded-[13px] bg-[#A6D6D9]">
-                  <p className="text-[20px] font-bold justify-self-center text-center">
-                    Humidity
-                  </p>
-                  <article className="grid grid-cols-ratio-1-2 items-center">
-                    <Image
-                      alt="An image of water droplets"
-                      width="90"
-                      height="100"
-                      src={humidIcon}
-                    />
-                    <p className="text-center text-[30px] justify-self-center">
-                      {data?.main.humidity} %
-                    </p>
-                  </article>
-                </article>
-                <article className="cloudness-card drop-shadow-md grid grid-cols-1 justify-items-stretch p-4 rounded-[13px] bg-[#A6D6D9]">
-                  <p className="text-[20px] font-bold justify-self-center text-center">
-                    Cloudness
-                  </p>
-                  <article className="grid grid-cols-ratio-1-2 items-center">
-                    <Image
-                      alt="An image of a water droplet"
-                      width="90"
-                      height="100"
-                      priority={true}
-                      src={Images["04d"]}
-                    />
-                    <p className="text-center text-[30px] justify-self-center">
-                      {data?.clouds.all} %
-                    </p>
-                  </article>
-                </article>
+      <ColumnHell className="bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
+        <HeadingBar location={data?.name || cachedData?.name} />
+        <MainDetails
+          icon={
+            Images[
+              data?.weather[0].icon || cachedData?.weather[0].icon || "01d"
+            ]
+          }
+          main={data?.weather[0].main || data?.weather[0].main}
+          description={
+            data?.weather[0].description || cachedData?.weather[0].description
+          }
+        />
+        <ColumnHell className="bottom-content mt-[200px] justify-items-center">
+          <ColumnHell className="weather-data-cards lg:w-[80%] w-[90%] gap-4">
+            <div className="two-cell-row grid md:grid-cols-2 grid-cols-1 items-stretch gap-3">
+              <WeatherArticle
+                title="Temperature"
+                image={thermoIcon}
+                mainData={`${data?.main.temp || cachedData?.main.temp}`}
+                unit="temp"
+                alt="Image of a thermometer"
+                belowData={[
+                  {
+                    key: "Max",
+                    value: data?.main.temp_max || cachedData?.main.temp_max,
+                  },
+                  {
+                    key: "Min",
+                    value: data?.main.temp_min || cachedData?.main.temp_min,
+                  },
+                ]}
+                color="#D8DBB1"
+              />
+              <div className="two-row-cell grid grid-cols-1 grid-row-2 items-stretch gap-3">
+                <WeatherLabel
+                  title="Humidity"
+                  icon={humidIcon}
+                  value={data?.main.humidity || cachedData?.main.humidity}
+                  alt="Icon of water droplets"
+                />
+                <WeatherLabel
+                  title="Cloudness"
+                  icon={Images["04d"]}
+                  value={data?.clouds.all || cachedData?.clouds.all}
+                  alt="Icon of water droplets"
+                />
               </div>
             </div>
-            <div className="split-container mt-[50px] grid grid-cols-2 grid-row-1 h-[380px] gap-4">
-              <article className="temperature-card drop-shadow-md grid grid-cols-1 items-center bg-[#C7C0E3] rounded-[13px] p-3">
-                <section className="grid grid-cols-1 justify-items-center">
-                  <p className="text-[20px] font-bold">Wind</p>
-                </section>
-                <section className="grid grid-cols-ratio-1-2 justify-items-center">
-                  <aside>
-                    <Image
-                      src={Images['50d']}
-                      alt="Image of an thermometer"
-                      height="150"
-                      width="100"
-                    />
-                  </aside>
-                  <section className="grid">
-                    <p className="text-[45px] font-bold justify-center">
-                      {data?.wind.speed || cachedData?.wind.speed} ms<sup>-1</sup>
-                    </p>
-                    <section className="grid grid-cols-ratio-1-2 gap-3">
-                      <p>Direction</p>
-                      <p>{getDirection(data?.wind.deg || cachedData?.wind.deg || 0)}</p>
-                    </section>
-                    <section className="grid grid-cols-2 gap-3">
-                      <p>Gust</p>
-                      <p>{data?.main.temp_min || cachedData?.main.temp_min} ms<sup>-1</sup></p>
-                    </section>
-                  </section>
-                </section>
-              </article>
-              <article className="temperature-card drop-shadow-md grid grid-cols-1 items-center bg-[#E2B2AF] rounded-[13px] p-3">
-                <section className="grid grid-cols-1 justify-items-center">
-                  <p className="text-[20px] font-bold">Pressure</p>
-                </section>
-                <section className="grid grid-cols-ratio-1-2 justify-items-center">
-                  <aside>
-                    <Image
-                      src={meterIcon}
-                      alt="Image of an thermometer"
-                      height="150"
-                      width="100"
-                    />
-                  </aside>
-                  <section className="grid justify-items-center">
-                    <p className="text-[45px] font-bold">
-                      {data?.main.pressure || cachedData?.main.pressure} hPa
-                    </p>
-                    <section className="grid grid-cols-2 gap-3">
-                      <p>Sea</p>
-                      <p>{data?.main.sea_level || cachedData?.main.sea_level}</p>
-                    </section>
-                    <section className="grid grid-cols-2 gap-3">
-                      <p>Ground</p>
-                      <p>{data?.main.grnd_level || cachedData?.main.grnd_level}</p>
-                    </section>
-                  </section>
-                </section>
-              </article>
+            <div className="two-cell-row grid md:grid-cols-2 items-stretch gap-3">
+              <WeatherArticle
+                title="Wind"
+                image={Images["50d"]}
+                mainData={data?.wind.speed}
+                unit="speed"
+                alt="An image of a tornado"
+                sideDescription={`Wind blows from ${getDirection(
+                  data?.wind.deg || cachedData?.wind.deg
+                )}`}
+                color="#C7C0E3"
+                belowData={[
+                  {
+                    key: "Gust",
+                    value: data?.main.temp_min || cachedData?.main.temp_min,
+                  },
+                ]}
+              />
+              <WeatherArticle
+                title="Pressure"
+                image={meterIcon}
+                mainData={data?.main.pressure}
+                unit="pressure"
+                alt="An image of a barrowmeter"
+                color="#E2B2AF"
+                belowData={[
+                  {
+                    key: "Ground",
+                    value: data?.main.grnd_level || cachedData?.main.grnd_level,
+                  },
+                  {
+                    key: "Sea",
+                    value: data?.main.sea_level || cachedData?.main.sea_level,
+                  },
+                ]}
+              />
             </div>
-          </div>
-        </div>
-      </div>
+          </ColumnHell>
+        </ColumnHell>
+      </ColumnHell>
     </Fragment>
   );
 }

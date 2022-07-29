@@ -1,5 +1,7 @@
 export function Footer() {
-    return (
-        <div></div>
-    )
+  return (
+    <footer className="footer w-full p-[20px]">
+      <div>This is the footer</div>
+    </footer>
+  );
 }

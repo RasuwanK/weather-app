@@ -4,9 +4,11 @@ import { LayoutProps } from "../interfaces/props";
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className="grid grid-cols-1 w-full">
       <Navbar />
-      <main id="main-content">{children}</main>
+      <main id="main-content" className="mt-[90px] z-0">
+        {children}
+      </main>
       <Footer />
     </div>
   );

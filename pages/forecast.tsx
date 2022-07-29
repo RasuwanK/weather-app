@@ -23,16 +23,30 @@ export default function ForecastPage() {
   // To obtain current weather status
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const [cachedData, setCachedData] = useState<WeatherData>();
-  const wind = getDirection(data?.wind.deg || cachedData?.wind.deg);
+  const wind = { dir: 50, from: "North", to: "South" }; //getDirection(data?.wind.deg || cachedData?.wind.deg);
+  const isLoading = isWeatherLoading || isLocationLoading;
 
+  // Fetch and save cached data from localstorage
   useEffect(() => {
-    setCachedData(JSON.parse(localStorage.getItem("weather-data") || "[]"));
+    setCachedData(JSON.parse(localStorage.getItem("weather-data") || "{}"));
   }, []);
 
   // In case if geolocation is not awailable in the browser
   if (noLocation) {
     console.error("No geolocation in the browser, internal error !");
-    return <p>No geolocation functionality awailable in the browser</p>;
+    return (
+      <Fragment>
+        <Head>
+          <title>Forecast - unsupported browser</title>
+        </Head>
+        <ColumnHell className="bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
+          <p className="text-center">
+            Unsupported browser - This browser does not have the geolocation
+            facility
+          </p>
+        </ColumnHell>
+      </Fragment>
+    );
   }
 
   return (
@@ -41,90 +55,127 @@ export default function ForecastPage() {
         <title>{"Today's forecast"}</title>
       </Head>
       <ColumnHell className="bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
-        <HeadingBar location={data?.name || cachedData?.name} />
-        <MainDetails
-          icon={
-            Images[
-              data?.weather[0].icon || cachedData?.weather[0].icon || "01d"
-            ]
-          }
-          main={data?.weather[0].main || data?.weather[0].main}
-          description={
-            data?.weather[0].description || cachedData?.weather[0].description
-          }
-        />
+        <aside className=""></aside>
+        {!isLoading ? (
+          <HeadingBar location={data?.name || cachedData?.name} />
+        ) : (
+          <>loading</>
+        )}
+        {!isLoading ? (
+          <MainDetails
+            icon={
+              Images[
+                !isLocationLoading
+                  ? data?.weather[0].icon ||
+                    cachedData?.weather[0].icon ||
+                    "01d"
+                  : "01d"
+              ]
+            }
+            main={data?.weather[0].main || data?.weather[0].main}
+            description={
+              data?.weather[0].description || cachedData?.weather[0].description
+            }
+          />
+        ) : (
+          <>Loading</>
+        )}
         <ColumnHell className="bottom-content mt-[200px] justify-items-center">
           <ColumnHell className="weather-data-cards lg:w-[80%] w-[90%] gap-4">
             <div className="two-cell-row grid md:grid-cols-2 grid-cols-1 items-stretch gap-3">
-              <WeatherArticle
-                title="Temperature"
-                image={thermoIcon}
-                mainData={`${data?.main.temp || cachedData?.main.temp}`}
-                unit="temp"
-                alt="Image of a thermometer"
-                belowData={[
-                  {
-                    key: "Max",
-                    value: data?.main.temp_max || cachedData?.main.temp_max,
-                  },
-                  {
-                    key: "Min",
-                    value: data?.main.temp_min || cachedData?.main.temp_min,
-                  },
-                ]}
-                color="#D8DBB1"
-              />
+              {!isLoading ? (
+                <WeatherArticle
+                  title="Temperature"
+                  image={thermoIcon}
+                  mainData={`${data?.main.temp || cachedData?.main.temp}`}
+                  unit="temp"
+                  alt="Image of a thermometer"
+                  belowData={[
+                    {
+                      key: "Max",
+                      value: data?.main.temp_max || cachedData?.main.temp_max,
+                    },
+                    {
+                      key: "Min",
+                      value: data?.main.temp_min || cachedData?.main.temp_min,
+                    },
+                  ]}
+                  color="#D8DBB1"
+                />
+              ) : (
+                <>loading</>
+              )}
               <div className="two-row-cell grid grid-cols-1 grid-row-2 items-stretch gap-3">
-                <WeatherLabel
-                  title="Humidity"
-                  icon={humidIcon}
-                  value={data?.main.humidity || cachedData?.main.humidity}
-                  alt="Icon of water droplets"
-                />
-                <WeatherLabel
-                  title="Cloudness"
-                  icon={Images["04d"]}
-                  value={data?.clouds.all || cachedData?.clouds.all}
-                  alt="Icon of water droplets"
-                />
+                {!isLoading ? (
+                  <WeatherLabel
+                    title="Humidity"
+                    icon={humidIcon}
+                    value={data?.main.humidity || cachedData?.main.humidity}
+                    alt="Icon of water droplets"
+                  />
+                ) : (
+                  <>Loading</>
+                )}
+                {!isLoading ? (
+                  <WeatherLabel
+                    title="Cloudness"
+                    icon={Images["04d"]}
+                    value={data?.clouds.all || cachedData?.clouds.all}
+                    alt="Icon of water droplets"
+                  />
+                ) : (
+                  <>dsdasdsad</>
+                )}
               </div>
             </div>
             <div className="two-cell-row grid md:grid-cols-2 items-stretch gap-3">
-              <WeatherArticle
-                title="Wind"
-                image={Images["50d"]}
-                mainData={data?.wind.speed}
-                unit="speed"
-                alt="An image of a tornado"
-                sideDescription={<Fragment>
-                  Wind blows <Quantity type="angle">{wind.dir}</Quantity> from {wind.from} towards {wind.to} 
-                </Fragment>}
-                color="#C7C0E3"
-                belowData={[
-                  {
-                    key: "Gust",
-                    value: data?.main.temp_min || cachedData?.main.temp_min,
-                  },
-                ]}
-              />
-              <WeatherArticle
-                title="Pressure"
-                image={meterIcon}
-                mainData={data?.main.pressure}
-                unit="pressure"
-                alt="An image of a barrowmeter"
-                color="#E2B2AF"
-                belowData={[
-                  {
-                    key: "Ground",
-                    value: data?.main.grnd_level || cachedData?.main.grnd_level,
-                  },
-                  {
-                    key: "Sea",
-                    value: data?.main.sea_level || cachedData?.main.sea_level,
-                  },
-                ]}
-              />
+              {!isLoading ? (
+                <WeatherArticle
+                  title="Wind"
+                  image={Images["50d"]}
+                  mainData={data?.wind.speed}
+                  unit="speed"
+                  alt="An image of a tornado"
+                  sideDescription={
+                    <Fragment>
+                      Wind blows <Quantity type="angle">{wind.dir}</Quantity>{" "}
+                      from {wind.from} towards {wind.to}
+                    </Fragment>
+                  }
+                  color="#C7C0E3"
+                  belowData={[
+                    {
+                      key: "Gust",
+                      value: data?.main.temp_min || cachedData?.main.temp_min,
+                    },
+                  ]}
+                />
+              ) : (
+                <>adasdasd</>
+              )}
+              {!isLoading ? (
+                <WeatherArticle
+                  title="Pressure"
+                  image={meterIcon}
+                  mainData={data?.main.pressure}
+                  unit="pressure"
+                  alt="An image of a barrowmeter"
+                  color="#E2B2AF"
+                  belowData={[
+                    {
+                      key: "Ground",
+                      value:
+                        data?.main.grnd_level || cachedData?.main.grnd_level,
+                    },
+                    {
+                      key: "Sea",
+                      value: data?.main.sea_level || cachedData?.main.sea_level,
+                    },
+                  ]}
+                />
+              ) : (
+                <>adawqeqeq</>
+              )}
             </div>
           </ColumnHell>
         </ColumnHell>

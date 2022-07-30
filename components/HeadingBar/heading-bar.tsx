@@ -19,7 +19,7 @@ export function HeadingBar({ location }: HeadingBarProps) {
           width="40"
           height="40"
         />
-        <p className="text-[16px] sx:text-[21px]">{location}</p>
+        <p className={`text-[16px] sx:text-[21px]`}>{location}</p>
       </div>
     </header>
   );

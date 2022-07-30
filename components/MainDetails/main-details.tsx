@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 interface MainDetailsProps {
-  icon: any;
+  icon: any | undefined;
   main: string | undefined;
   description: string | undefined;
 }
@@ -14,7 +14,9 @@ export function MainDetails({ icon, main, description }: MainDetailsProps) {
       </section>
       <section className="content">
         <h1 className="font-bold sm:text-[40px] text-[30px]">{main}</h1>
-        <p className="font-semibold sm:text-[20px] text-[15px]">{description}</p>
+        <p className="font-semibold sm:text-[20px] text-[15px]">
+          {description}
+        </p>
       </section>
     </article>
   );

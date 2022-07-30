@@ -25,7 +25,7 @@ export function useLocation() {
             setLocationLoading(false);
             setLocationError(error);
           },
-          { timeout: Infinity, enableHighAccuracy: true, maximumAge: 0 }
+          { timeout: 120000, enableHighAccuracy: true, maximumAge: 0 }
         );
       } else {
         setLocationLoading(false);

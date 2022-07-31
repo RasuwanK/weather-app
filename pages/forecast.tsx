@@ -1,12 +1,6 @@
 import Head from "next/head";
 import { useWeather } from "../hooks/useWeather";
 import { useLocation } from "../hooks/useLocation";
-import Images from "../lib/weather-icons";
-import humidIcon from "../public/weather-icons/water-drop.svg";
-import rainIcon from "../public/weather-icons/rain.svg";
-import thermoIcon from "../public/weather-icons/thermometer.svg";
-import meterIcon from "../public/weather-icons/meter.svg";
-import loadingIcon from "../public/weather-icons/Radio-1s-200px.gif";
 import { Fragment } from "react";
 import { getDirection } from "../lib/directions";
 import { WeatherArticle } from "../components/WeatherArticle/weather-article";
@@ -15,10 +9,14 @@ import { ColumnHell } from "../components/Grid/column-hell";
 import { HeadingBar } from "../components/HeadingBar/heading-bar";
 import { MainDetails } from "../components/MainDetails/main-details";
 import { Quantity } from "../components/Text/quantity";
-import Image from "next/image";
-import { BoldText } from "../components/Text/bold-text";
 import { LoadingWeather } from "../components/Loading/loading-weather";
 import { LoadingLocation } from "../components/Loading/loading-location";
+import { WeatherIcon } from "../components/SVGs/weather-icon";
+import { ThermoIcon } from "../components/SVGs/thermo-icon";
+import { HumidityIcon } from "../components/SVGs/humidity-icon";
+import { CloudIcon } from "../components/SVGs/cloud-icon";
+import { WindIcon } from "../components/SVGs/wind-icon";
+import { BarrowIcon } from "../components/SVGs/barrow-icon";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -74,7 +72,12 @@ export default function ForecastPage() {
             <HeadingBar location={data?.name} />
             {/* Main weather details container  */}
             <MainDetails
-              icon={Images[data?.weather[0].icon]}
+              Icon={
+                <WeatherIcon
+                  id={data?.weather[0].id}
+                  dimensions={{ width: 150, height: 150 }}
+                />
+              }
               main={data?.weather[0].main}
               description={data?.weather[0].description}
             />
@@ -84,10 +87,9 @@ export default function ForecastPage() {
                 <div className="two-cell-row grid md:grid-cols-2 grid-cols-1 my-4 items-stretch gap-3">
                   <WeatherArticle
                     title="Temperature"
-                    image={thermoIcon}
+                    Icon={<ThermoIcon dimensions={{ width: 90, height: 90 }} />}
                     mainData={`${data?.main.temp}`}
                     unit="temp"
-                    alt="Image of a thermometer"
                     belowData={[
                       {
                         key: "Max",
@@ -103,13 +105,17 @@ export default function ForecastPage() {
                   <div className="two-row-cell grid grid-cols-1 grid-row-2 items-stretch gap-3">
                     <WeatherLabel
                       title="Humidity"
-                      icon={humidIcon}
+                      Icon={
+                        <HumidityIcon dimensions={{ width: 90, height: 90 }} />
+                      }
                       value={data?.main.humidity}
                       alt="Icon of water droplets"
                     />
                     <WeatherLabel
                       title="Cloudness"
-                      icon={Images["04d"]}
+                      Icon={
+                        <CloudIcon dimensions={{ width: 90, height: 90 }} />
+                      }
                       value={data?.clouds.all}
                       alt="Icon of water droplets"
                     />
@@ -118,10 +124,9 @@ export default function ForecastPage() {
                 <div className="two-cell-row grid md:grid-cols-2 items-stretch gap-3 my-4">
                   <WeatherArticle
                     title="Wind"
-                    image={Images["50d"]}
+                    Icon={<WindIcon dimensions={{ width: 90, height: 90 }} />}
                     mainData={data?.wind.speed}
                     unit="speed"
-                    alt="An image of a tornado"
                     sideDescription={
                       <Fragment>
                         Wind blows <Quantity type="angle">{wind.dir}</Quantity>{" "}
@@ -138,10 +143,9 @@ export default function ForecastPage() {
                   />
                   <WeatherArticle
                     title="Pressure"
-                    image={meterIcon}
+                    Icon={<BarrowIcon dimensions={{ width: 90, height: 90 }} />}
                     mainData={data?.main.pressure}
                     unit="pressure"
-                    alt="An image of a barrowmeter"
                     color="#E2B2AF"
                     belowData={[
                       {

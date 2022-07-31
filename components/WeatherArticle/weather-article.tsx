@@ -1,26 +1,24 @@
-import Image from "next/image";
 import { BoldText } from "../Text/bold-text";
 import { BoldMediumText } from "../Text/bold-medium-text";
 import { Quantity } from "../Text/quantity";
 import { ReactNode } from "react";
+import { WeatherIcon, Icon } from "../SVGs/weather-icon";
 
 interface WeatherArticleProps {
   title: String;
-  image: any;
+  Icon: JSX.Element;
   mainData: number | string | undefined;
   belowData: { key: string | number; value: string | number | undefined }[];
   color: string;
   unit: string;
   sideDescription?: ReactNode;
-  alt: string;
 }
 
 export function WeatherArticle({
   title,
-  image,
+  Icon,
   mainData,
   belowData,
-  alt,
   unit,
   sideDescription,
   color,
@@ -37,9 +35,7 @@ export function WeatherArticle({
         </section>
       </section>
       <section className="grid items-center justify-items-center grid-cols-1 sx:grid-cols-ratio-1-2">
-        <section className="left">
-          <Image alt={alt} src={image} width="100" height="100" priority />
-        </section>
+        <section className="left">{Icon}</section>
         <section className="right grid grid-cols-1 justify-items-center">
           <section className="main-data">
             <BoldMediumText isCenter={true}>

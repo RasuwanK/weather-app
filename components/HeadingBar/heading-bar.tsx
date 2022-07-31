@@ -1,5 +1,4 @@
-import locationIcon from "../../public/weather-icons/location.svg";
-import Image from "next/image";
+import { LocationIcon } from "../SVGs/location-icon";
 
 interface HeadingBarProps {
   location: string | undefined;
@@ -12,13 +11,7 @@ export function HeadingBar({ location }: HeadingBarProps) {
         {"Today's weather"}
       </p>
       <div className="justify-self-end grid grid-cols-ratio-1-2 items-center p-3">
-        <Image
-          alt="Location icon"
-          src={locationIcon}
-          layout="fixed"
-          width="40"
-          height="40"
-        />
+        <LocationIcon dimensions={{ width: 40, height: 40 }} />
         <p className={`text-[16px] sx:text-[21px]`}>{location}</p>
       </div>
     </header>

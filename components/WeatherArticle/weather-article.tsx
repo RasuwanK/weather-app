@@ -25,7 +25,7 @@ export function WeatherArticle({
 }: WeatherArticleProps) {
   return (
     <article
-      className={`weather-article drop-shadow-md grid grid-cols-1 grid-rows-ratio-1-5 rounded-[13px] h-[400px] p-3`}
+      className={`weather-article drop-shadow-md grid grid-cols-1 grid-rows-ratio-1-5 h-[400px] rounded-[13px] p-3`}
       style={{ backgroundColor: `${color}` }}
     >
       <section className="title">

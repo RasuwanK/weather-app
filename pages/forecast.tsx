@@ -9,14 +9,15 @@ import { ColumnHell } from "../components/Grid/column-hell";
 import { HeadingBar } from "../components/HeadingBar/heading-bar";
 import { MainDetails } from "../components/MainDetails/main-details";
 import { Quantity } from "../components/Text/quantity";
-import { LoadingWeather } from "../components/Loading/loading-weather";
-import { LoadingLocation } from "../components/Loading/loading-location";
 import { WeatherIcon } from "../components/SVGs/weather-icon";
 import { ThermoIcon } from "../components/SVGs/thermo-icon";
 import { HumidityIcon } from "../components/SVGs/humidity-icon";
 import { CloudIcon } from "../components/SVGs/cloud-icon";
 import { WindIcon } from "../components/SVGs/wind-icon";
 import { BarrowIcon } from "../components/SVGs/barrow-icon";
+import { ScreenMessage } from "../components/ScreenMessage/screen-message";
+import magnifier from "../public/Magnify-1.4s-200px.gif";
+import radio from "../public/Radio-1s-200px.gif";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -25,7 +26,6 @@ export default function ForecastPage() {
   // To obtain current weather status
   const { data, isWeatherLoading, weatherError } = useWeather(location);
   const wind = data && getDirection(data?.wind.deg); //getDirection(data?.wind.deg || cachedData?.wind.deg);
-  const isError = weatherError || locationError;
 
   // In case if geolocation is not awailable in the browser
   if (noLocation) {
@@ -52,18 +52,23 @@ export default function ForecastPage() {
       </Head>
       {isLocationLoading ? (
         <Fragment>
-          <LoadingLocation />
+          <ScreenMessage message="Gathering location data" image={magnifier} />
         </Fragment>
+      ) : locationError ? (
+          locationError.code === 1 ? <ScreenMessage
+            message="Please give your order to access location"
+            image={magnifier}
+          />: locationError.code === 2 ? <ScreenMessage message="We can't find where you are" image={magnifier} /> : locationError.code === 3 ? <ScreenMessage message="Hey we waited so long but we can't find where you are" image={magnifier} /> : <></>
       ) : isWeatherLoading ? (
         <Fragment>
-          <LoadingWeather />
+          <ScreenMessage message="Gathering weather data" image={radio} />
         </Fragment>
-      ) : isError ? (
+      ) : weatherError ? (
         <Fragment>
-          <div className="flex flex-col h-[1700px]">
-            {locationError && <p>Error while loading location</p>}
-            {weatherError && <p>Error while loading weather data</p>}
-          </div>
+          <ScreenMessage
+            message={`${weatherError}`}
+            image={radio}
+          />
         </Fragment>
       ) : (
         <Fragment>
@@ -84,7 +89,7 @@ export default function ForecastPage() {
             {/* The whole */}
             <div className="flex flex-col bottom-content mt-[200px] items-center">
               <div className="weather-data-cards flex flex-col lg:w-[80%] w-[90%]">
-                <div className="two-cell-row grid md:grid-cols-2 grid-cols-1 my-4 items-stretch gap-3">
+                <div className="two-cell-row grid md:grid-cols-2 grid-cols-1 my-4 gap-3">
                   <WeatherArticle
                     title="Temperature"
                     Icon={<ThermoIcon dimensions={{ width: 90, height: 90 }} />}
@@ -102,7 +107,7 @@ export default function ForecastPage() {
                     ]}
                     color="#D8DBB1"
                   />
-                  <div className="two-row-cell grid grid-cols-1 grid-row-2 items-stretch gap-3">
+                  <div className="two-row-cell grid grid-cols-1 grid-row-2 gap-3">
                     <WeatherLabel
                       title="Humidity"
                       Icon={
@@ -121,7 +126,7 @@ export default function ForecastPage() {
                     />
                   </div>
                 </div>
-                <div className="two-cell-row grid md:grid-cols-2 items-stretch gap-3 my-4">
+                <div className="two-cell-row grid md:grid-cols-2 gap-3 my-4">
                   <WeatherArticle
                     title="Wind"
                     Icon={<WindIcon dimensions={{ width: 90, height: 90 }} />}

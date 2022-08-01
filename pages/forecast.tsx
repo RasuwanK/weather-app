@@ -19,6 +19,13 @@ import { ScreenMessage } from "../components/ScreenMessage/screen-message";
 import magnifier from "../public/Magnify-1.4s-200px.gif";
 import radio from "../public/Radio-1s-200px.gif";
 import { LongWeatherArticle } from "../components/WeatherArticle/long-weather-article";
+import keyIcon from "../public/encryption.gif";
+import { Lock } from "../components/SVGs/lock";
+import { NoLocation } from "../components/SVGs/no-location";
+import { Clock } from "../components/SVGs/clock";
+import { LoadingMap } from "../components/SVGs/loading-map";
+import { LoadingCloud } from "../components/SVGs/loading-cloud";
+import { Error404 } from "../components/SVGs/error-404";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -44,34 +51,43 @@ export default function ForecastPage() {
         </ColumnHell>
       ) : isLocationLoading ? (
         <Fragment>
-          <ScreenMessage message="Gathering location data" image={magnifier} />
+          <ScreenMessage
+            message="Gathering location data"
+            image={<LoadingMap dimensions={{ width: 80, height: 80 }} />}
+          />
         </Fragment>
       ) : locationError ? (
         locationError.code === 1 ? (
           <ScreenMessage
             message="Please give your order to access location"
-            image={magnifier}
+            image={<Lock dimensions={{ width: 80, height: 80 }} />}
           />
         ) : locationError.code === 2 ? (
           <ScreenMessage
-            message="We can't find where you are"
-            image={magnifier}
+            message="We can't find where you are, Seems like no internet"
+            image={<NoLocation dimensions={{ width: 80, height: 80 }} />}
           />
         ) : locationError.code === 3 ? (
           <ScreenMessage
             message="Hey we waited so long but we can't find where you are"
-            image={magnifier}
+            image={<Clock dimensions={{ width: 80, height: 80 }} />}
           />
         ) : (
           <></>
         )
       ) : isWeatherLoading ? (
         <Fragment>
-          <ScreenMessage message="Gathering weather data" image={radio} />
+          <ScreenMessage
+            message="Gathering weather data"
+            image={<LoadingCloud dimensions={{ width: 80, height: 80 }} />}
+          />
         </Fragment>
       ) : weatherError ? (
         <Fragment>
-          <ScreenMessage message={`${weatherError}`} image={radio} />
+          <ScreenMessage
+            message={`${weatherError}`}
+            image={<Error404 dimensions={{ width: 80, height: 80 }} />}
+          />
         </Fragment>
       ) : (
         <Fragment>

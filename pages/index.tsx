@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 
 export default function IndexPage() {
   return (
@@ -7,13 +6,8 @@ export default function IndexPage() {
       <Head>
         <title>Weather App</title>
       </Head>
-      <div className="">
-        <article>
-          <p>Welcome the weather forecaster</p>
-          <Link href="/forecast">
-            <a>Get started</a>
-          </Link>
-        </article>
+      <div className="flex flex-col w-full h-[1000px]">
+        <p className="welcome-title text-4xl sm:text-6xl text-center p-4 text-[#1E1C1F]">The Weather Station</p>
       </div>
     </div>
   );

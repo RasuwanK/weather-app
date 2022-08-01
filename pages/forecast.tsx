@@ -16,10 +16,7 @@ import { CloudIcon } from "../components/SVGs/cloud-icon";
 import { WindIcon } from "../components/SVGs/wind-icon";
 import { BarrowIcon } from "../components/SVGs/barrow-icon";
 import { ScreenMessage } from "../components/ScreenMessage/screen-message";
-import magnifier from "../public/Magnify-1.4s-200px.gif";
-import radio from "../public/Radio-1s-200px.gif";
 import { LongWeatherArticle } from "../components/WeatherArticle/long-weather-article";
-import keyIcon from "../public/encryption.gif";
 import { Lock } from "../components/SVGs/lock";
 import { NoLocation } from "../components/SVGs/no-location";
 import { Clock } from "../components/SVGs/clock";
@@ -43,7 +40,7 @@ export default function ForecastPage() {
         <title>{"Today's forecast"}</title>
       </Head>
       {noLocation ? (
-        <ColumnHell className="bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
+        <ColumnHell>
           <p className="text-center">
             Unsupported browser - This browser does not have the geolocation
             facility
@@ -106,12 +103,12 @@ export default function ForecastPage() {
               description={data?.weather[0].description}
             />
             {/* The whole */}
-            <div className="flex flex-col bottom-content mt-[200px] items-center">
-              <div className="weather-data-cards flex flex-col lg:w-[80%] w-[90%]">
+            <div className="flex flex-col bottom-content mt-[10px] items-center">
+              <div className="weather-data-cards mt-[100px] flex flex-col lg:w-[80%] w-[90%]">
                 {"rain" in data! ? (
                   <LongWeatherArticle
                     title="Rainfall"
-                    color="#9AC3A8"
+                    color="#79BC90"
                     fallback="No rainfall"
                     unit="rainfall"
                     Icon={
@@ -135,7 +132,7 @@ export default function ForecastPage() {
                 {"snow" in data! ? (
                   <LongWeatherArticle
                     title="Rainfall"
-                    color="#CBCCCC"
+                    color="#69A7BB"
                     fallback="No rainfall"
                     unit="rainfall"
                     Icon={
@@ -189,7 +186,7 @@ export default function ForecastPage() {
                             },
                           }
                     }
-                    color="#D8DBB1"
+                    color="#CBD185"
                   />
                   <div className="two-row-cell grid grid-cols-1 grid-row-2 gap-3">
                     <WeatherLabel
@@ -222,7 +219,7 @@ export default function ForecastPage() {
                         from {wind.from} towards {wind.to}
                       </Fragment>
                     }
-                    color="#C7C0E3"
+                    color="#AE9BFA"
                     metaData={{
                       "1": {
                         key: "Gust",
@@ -236,7 +233,7 @@ export default function ForecastPage() {
                     Icon={<BarrowIcon dimensions={{ width: 90, height: 90 }} />}
                     mainData={data?.main.pressure}
                     unit="pressure"
-                    color="#E2B2AF"
+                    color="#E8847D"
                     metaData={{
                       "1": {
                         key: "Ground",

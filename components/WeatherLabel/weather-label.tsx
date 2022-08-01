@@ -11,7 +11,7 @@ interface WeatherLabelProps {
 
 export function WeatherLabel({ title, Icon, value, alt }: WeatherLabelProps) {
   return (
-    <article className="weather-label grid grid-cols-1 bg-[#A6D6D9] rounded-[13px] p-4">
+    <article className="weather-label grid grid-cols-1 bg-[#63C2C8] rounded-[13px] p-4">
       <section className="title">
         <BoldText isCenter={true}>{title}</BoldText>
       </section>

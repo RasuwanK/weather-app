@@ -17,7 +17,7 @@ const fetcher = async (url: string) => {
 export function useWeather(location: GeolocationCoordinates | undefined) {
   const units = "metric";
   const apiKey = "edce4dcfe8fd9291e28d45aa56cac0c8";
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<WeatherData>(
     `https://api.openweathermap.org/data/2.5/weather?lat=${location?.latitude.toString()}&lon=${location?.longitude.toString()}&units=${units}&appid=${apiKey}`,
     fetcher
   );

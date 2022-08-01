@@ -18,6 +18,7 @@ import { BarrowIcon } from "../components/SVGs/barrow-icon";
 import { ScreenMessage } from "../components/ScreenMessage/screen-message";
 import magnifier from "../public/Magnify-1.4s-200px.gif";
 import radio from "../public/Radio-1s-200px.gif";
+import { LongWeatherArticle } from "../components/WeatherArticle/long-weather-article";
 
 export default function ForecastPage() {
   // Used to detect live location
@@ -25,50 +26,52 @@ export default function ForecastPage() {
     useLocation();
   // To obtain current weather status
   const { data, isWeatherLoading, weatherError } = useWeather(location);
-  const wind = data && getDirection(data?.wind.deg); //getDirection(data?.wind.deg || cachedData?.wind.deg);
-
-  // In case if geolocation is not awailable in the browser
-  if (noLocation) {
-    console.error("No geolocation in the browser, internal error !");
-    return (
-      <Fragment>
-        <Head>
-          <title>Forecast - unsupported browser</title>
-        </Head>
-        <ColumnHell className="bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
-          <p className="text-center">
-            Unsupported browser - This browser does not have the geolocation
-            facility
-          </p>
-        </ColumnHell>
-      </Fragment>
-    );
-  }
+  const wind = data
+    ? getDirection(data?.wind.deg)
+    : { dir: " ", from: "....", to: "....." }; //getDirection(data?.wind.deg || cachedData?.wind.deg);
 
   return (
     <Fragment>
       <Head>
         <title>{"Today's forecast"}</title>
       </Head>
-      {isLocationLoading ? (
+      {noLocation ? (
+        <ColumnHell className="bg-gradient-to-b from-[#D7F9D0] to-[#EEF9ED]">
+          <p className="text-center">
+            Unsupported browser - This browser does not have the geolocation
+            facility
+          </p>
+        </ColumnHell>
+      ) : isLocationLoading ? (
         <Fragment>
           <ScreenMessage message="Gathering location data" image={magnifier} />
         </Fragment>
       ) : locationError ? (
-          locationError.code === 1 ? <ScreenMessage
+        locationError.code === 1 ? (
+          <ScreenMessage
             message="Please give your order to access location"
             image={magnifier}
-          />: locationError.code === 2 ? <ScreenMessage message="We can't find where you are" image={magnifier} /> : locationError.code === 3 ? <ScreenMessage message="Hey we waited so long but we can't find where you are" image={magnifier} /> : <></>
+          />
+        ) : locationError.code === 2 ? (
+          <ScreenMessage
+            message="We can't find where you are"
+            image={magnifier}
+          />
+        ) : locationError.code === 3 ? (
+          <ScreenMessage
+            message="Hey we waited so long but we can't find where you are"
+            image={magnifier}
+          />
+        ) : (
+          <></>
+        )
       ) : isWeatherLoading ? (
         <Fragment>
           <ScreenMessage message="Gathering weather data" image={radio} />
         </Fragment>
       ) : weatherError ? (
         <Fragment>
-          <ScreenMessage
-            message={`${weatherError}`}
-            image={radio}
-          />
+          <ScreenMessage message={`${weatherError}`} image={radio} />
         </Fragment>
       ) : (
         <Fragment>
@@ -79,7 +82,7 @@ export default function ForecastPage() {
             <MainDetails
               Icon={
                 <WeatherIcon
-                  id={data?.weather[0].id}
+                  id={data?.weather[0].icon}
                   dimensions={{ width: 150, height: 150 }}
                 />
               }
@@ -89,22 +92,87 @@ export default function ForecastPage() {
             {/* The whole */}
             <div className="flex flex-col bottom-content mt-[200px] items-center">
               <div className="weather-data-cards flex flex-col lg:w-[80%] w-[90%]">
+                {"rain" in data! ? (
+                  <LongWeatherArticle
+                    title="Rainfall"
+                    color="#9AC3A8"
+                    fallback="No rainfall"
+                    unit="rainfall"
+                    Icon={
+                      <WeatherIcon
+                        id="10d"
+                        dimensions={{ width: 90, height: 90 }}
+                      />
+                    }
+                    middleData={{
+                      key: "Last 1h",
+                      value: data?.rain["1h"]?.toString(),
+                    }}
+                    rightData={{
+                      key: "Last 3h",
+                      value: data?.rain["3h"]?.toString(),
+                    }}
+                  />
+                ) : (
+                  <Fragment></Fragment>
+                )}
+                {"snow" in data! ? (
+                  <LongWeatherArticle
+                    title="Rainfall"
+                    color="#CBCCCC"
+                    fallback="No rainfall"
+                    unit="rainfall"
+                    Icon={
+                      <WeatherIcon
+                        id="10d"
+                        dimensions={{ width: 90, height: 90 }}
+                      />
+                    }
+                    middleData={{
+                      key: "Last 1h",
+                      value: data?.snow["1h"]?.toString(),
+                    }}
+                    rightData={{
+                      key: "Last 3h",
+                      value: data?.snow["3h"]?.toString(),
+                    }}
+                  />
+                ) : (
+                  <Fragment></Fragment>
+                )}
                 <div className="two-cell-row grid md:grid-cols-2 grid-cols-1 my-4 gap-3">
                   <WeatherArticle
                     title="Temperature"
                     Icon={<ThermoIcon dimensions={{ width: 90, height: 90 }} />}
                     mainData={`${data?.main.temp}`}
                     unit="temp"
-                    belowData={[
-                      {
-                        key: "Max",
-                        value: data?.main.temp_max,
-                      },
-                      {
-                        key: "Min",
-                        value: data?.main.temp_min,
-                      },
-                    ]}
+                    metaData={
+                      data?.main.temp_min !== data?.main.temp_max
+                        ? {
+                            "1": {
+                              key: "Max",
+                              value: data?.main.temp_max.toString(),
+                              unit: "temp",
+                            },
+                            "2": {
+                              key: "Min",
+                              value: data?.main.temp_min.toString(),
+                              unit: "temp",
+                            },
+                            "3": {
+                              key: "Feels Like",
+                              value: data?.main.feels_like.toString(),
+                              unit: "temp",
+                            },
+                          }
+                        : {
+                            "1": {
+                              key: "Feels Like",
+                              value: data?.main.feels_like.toString(),
+                              unit: "temp",
+                            },
+                          }
+                    }
                     color="#D8DBB1"
                   />
                   <div className="two-row-cell grid grid-cols-1 grid-row-2 gap-3">
@@ -139,12 +207,13 @@ export default function ForecastPage() {
                       </Fragment>
                     }
                     color="#C7C0E3"
-                    belowData={[
-                      {
+                    metaData={{
+                      "1": {
                         key: "Gust",
-                        value: data?.main.temp_min,
+                        value: data?.wind.gust.toString(),
+                        unit: "speed",
                       },
-                    ]}
+                    }}
                   />
                   <WeatherArticle
                     title="Pressure"
@@ -152,16 +221,18 @@ export default function ForecastPage() {
                     mainData={data?.main.pressure}
                     unit="pressure"
                     color="#E2B2AF"
-                    belowData={[
-                      {
+                    metaData={{
+                      "1": {
                         key: "Ground",
-                        value: data?.main.grnd_level,
+                        value: data?.main.grnd_level.toString(),
+                        unit: "pressure",
                       },
-                      {
+                      "2": {
                         key: "Sea",
-                        value: data?.main.sea_level,
+                        value: data?.main.sea_level.toString(),
+                        unit: "pressure",
                       },
-                    ]}
+                    }}
                   />
                 </div>
               </div>

@@ -1,16 +1,14 @@
 import { Fragment, ReactNode } from "react";
 
 interface QuantityProps {
-  type: string;
+  type: string | undefined;
   children: ReactNode;
 }
 
 export function Quantity({ type, children }: QuantityProps) {
   if (type == "speed") {
     return (
-      <Fragment>
-        {children} ms<sup>-1</sup>
-      </Fragment>
+      <Fragment>{children} ms<sup>-1</sup></Fragment>
     );
   } else if (type == "temp") {
     return (
@@ -29,6 +27,8 @@ export function Quantity({ type, children }: QuantityProps) {
         <sup>0</sup>
       </Fragment>
     );
+  } else if (type == "rainfall") {
+    return <Fragment>{children} mm</Fragment>;
   } else {
     return <Fragment>{children}</Fragment>;
   }

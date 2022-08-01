@@ -34,12 +34,12 @@ type Cloud = {
 type Rain = {
   "1h": number;
   "3h": number;
-}
+};
 
 type Snow = {
   "1h": number;
   "3h": number;
-}
+};
 
 type Sys = {
   type: number;

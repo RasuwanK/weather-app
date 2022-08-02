@@ -14,7 +14,7 @@ export function Navbar() {
           Home
         </NavLink>
         <NavLink
-          href="/forecast"
+          href="/current"
           icon={<CloudSun dimensions={{ width: 30, height: 30 }} />}
         >
           Forecast

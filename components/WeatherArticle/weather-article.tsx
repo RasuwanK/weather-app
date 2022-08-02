@@ -44,7 +44,7 @@ export function WeatherArticle({
           <BoldText isCenter>{title}</BoldText>
         </section>
         <section className="side-description grid p-3 mt-3 grid-cols-1 justify-items-center">
-          <p className="text-center text-xl">{sideDescription}</p>
+          <p className="text-center sx:text-xl">{sideDescription}</p>
         </section>
       </section>
       <section className="bottom grid items-center justify-items-center grid-cols-1 sx:grid-cols-ratio-1-2">
@@ -57,12 +57,12 @@ export function WeatherArticle({
           </section>
           <section className="meta-data grid grid-cols-2 grid-rows-2 gap-2 justify-items-center">
             {/* 1st row */}
-            <div className="text-2xl">
+            <div className="lg:text-2xl">
               {typeof metaData !== "undefined" && metaData["1"]?.key}
             </div>
             <div>
               {typeof metaData !== "undefined" && (
-                <p className="text-2xl">
+                <p className="lg:text-2xl">
                   <Quantity type={metaData["1"]?.unit}>
                     {metaData["1"]?.value}
                   </Quantity>
@@ -70,10 +70,12 @@ export function WeatherArticle({
               )}
             </div>
             {/* 2st row */}
-            <div className="text-2xl">{typeof metaData !== "undefined" && metaData["2"]?.key}</div>
+            <div className="lg:text-2xl">
+              {typeof metaData !== "undefined" && metaData["2"]?.key}
+            </div>
             <div>
               {typeof metaData !== "undefined" && (
-                <p className="text-2xl">
+                <p className="lg:text-2xl">
                   <Quantity type={metaData["2"]?.unit}>
                     {metaData["2"]?.value}
                   </Quantity>
@@ -81,10 +83,12 @@ export function WeatherArticle({
               )}
             </div>
             {/* 3st row */}
-            <div className="text-2xl">{typeof metaData !== "undefined" && metaData["3"]?.key}</div>
+            <div className="lg:text-2xl">
+              {typeof metaData !== "undefined" && metaData["3"]?.key}
+            </div>
             <div>
               {typeof metaData !== "undefined" && (
-                <p className="text-2xl">
+                <p className="lg:text-2xl">
                   <Quantity type={metaData["3"]?.unit}>
                     {metaData["3"]?.value}
                   </Quantity>

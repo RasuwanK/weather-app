@@ -8,10 +8,10 @@ export default function IndexPage() {
   return (
     <div>
       <Head>
-        <title>Weather App</title>
+        <title>The Weather Station</title>
       </Head>
       <div className="flex flex-col items-center gap-[100px] w-full mb-[100px]">
-        <p className="welcome-title text-4xl sm:text-6xl text-center p-4 text-[#1E1C1F]">
+        <p className="welcome-title text-6xl text-center p-4 text-[#1E1C1F]">
           The Weather Station<sup className="text-sm">(beta)</sup>
         </p>
         <p className="welcome-message text-2xl text-center p-4">

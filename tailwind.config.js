@@ -27,7 +27,8 @@ module.exports = {
         "ratio-1-2-1": "1fr 2fr 1fr"
       },
       screens: {
-        "sx":"370px"
+        "sx":"370px",
+        "mx": "820px"
       }
     },
   },

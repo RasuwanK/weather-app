@@ -7,7 +7,7 @@ interface SunClockIconProps {
   dimensions: Dimensions;
 }
 
-export function HomeIcon({ dimensions }: SunClockIconProps) {
+export function SunClock({ dimensions }: SunClockIconProps) {
   return (
     <svg
       width={dimensions.width}

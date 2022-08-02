@@ -15,13 +15,15 @@ export function WelcomeCard({
   redirect,
 }: WelcomeCardProps) {
   return (
-    <article className="grid grid-rows-ratio-1-2-1 grid-cols-1 rounded-[13px] bg-white/[0.61]">
-      <section>{title}</section>
-      <section>
-        <Fragment>{icon}</Fragment>
-        <p>{description}</p>
+    <article className="w-[360px] h-[520px] grid grid-rows-ratio-1-2-1 justify-items-center items-center gap-4 p-10 grid-cols-1 rounded-[13px] bg-white/[0.61]">
+      <section className="grid grid-cols-1">
+        <p className="text-center font-bold text-xl">{title}</p>
       </section>
-      <section>
+      <section className="grid grid-cols-1 gap-5 justify-items-center">
+        <Fragment>{icon}</Fragment>
+        <p className="text-center text-sm">{description}</p>
+      </section>
+      <section className="grid">
         <LinkButton href={redirect}>Get started</LinkButton>
       </section>
     </article>
